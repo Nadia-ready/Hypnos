@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/reservations')]
+
 class ReservationsController extends AbstractController
 {
-    #[Route('/', name: 'app_reservations_index', methods: ['GET'])]
+    #[Route('/reservations', name: 'reservations_list', methods: ['GET'])]
     public function index(ReservationsRepository $reservationsRepository): Response
     {
         return $this->render('reservations/index.html.twig', [
@@ -21,7 +21,7 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_reservations_new', methods: ['GET', 'POST'])]
+    #[Route('/reservations/new', name: 'reservations_list_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationsRepository $reservationsRepository): Response
     {
         $reservation = new Reservations();
@@ -30,7 +30,7 @@ class ReservationsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationsRepository->add($reservation);
-            return $this->redirectToRoute('app_reservations_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reservations_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reservations/new.html.twig', [
@@ -39,7 +39,7 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_reservations_show', methods: ['GET'])]
+    #[Route('/reservations/{id}', name: 'reservations_list_show', methods: ['GET'])]
     public function show(Reservations $reservation): Response
     {
         return $this->render('reservations/show.html.twig', [
@@ -47,7 +47,7 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_reservations_edit', methods: ['GET', 'POST'])]
+    #[Route('/reservations/{id}/edit', name: 'reservations_list_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservations $reservation, ReservationsRepository $reservationsRepository): Response
     {
         $form = $this->createForm(ReservationsType::class, $reservation);
@@ -55,7 +55,7 @@ class ReservationsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationsRepository->add($reservation);
-            return $this->redirectToRoute('app_reservations_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reservations_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reservations/edit.html.twig', [
@@ -64,13 +64,13 @@ class ReservationsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_reservations_delete', methods: ['POST'])]
+    #[Route('/reservations/{id}', name: 'reservations_list_delete', methods: ['POST'])]
     public function delete(Request $request, Reservations $reservation, ReservationsRepository $reservationsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
             $reservationsRepository->remove($reservation);
         }
 
-        return $this->redirectToRoute('app_reservations_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('reservations_list', [], Response::HTTP_SEE_OTHER);
     }
 }

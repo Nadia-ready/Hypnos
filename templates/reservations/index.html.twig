@@ -21,8 +21,8 @@
                 <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_reservations_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservations_edit', {'id': reservation.id}) }}">edit</a>
+                    <a href="{{ path('reservations_list_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('reservations_list_edit', {'id': reservation.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservations_new') }}">Create new</a>
+    <a href="{{ path('reservations_list_new') }}">Create new</a>
 {% endblock %}

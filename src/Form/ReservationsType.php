@@ -30,11 +30,13 @@ class ReservationsType extends AbstractType
                 'class' => Establishments::class,
                 'choice_label' => 'name',
                 'required' => true,
+                'mapped' => false,
             ])
             ->add('suite', EntityType::class, [
                 'class' => Suites::class,
                 'choice_label' => 'title',
                 'required' => true,
+                'mapped' => false,
             ])
         ;
     }
