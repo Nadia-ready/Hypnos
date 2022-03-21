@@ -163,4 +163,5 @@ class Establishments
 
         return $this;
     }
+
 }
