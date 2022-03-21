@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Manager;
 use App\Form\ManagerType;
@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/manager')]
+
 class ManagerController extends AbstractController
 {
-    #[Route('/', name: 'app_manager_index', methods: ['GET'])]
+    #[Route('/admin/manager', name: 'manager_list', methods: ['GET'])]
     public function index(ManagerRepository $managerRepository): Response
     {
         return $this->render('manager/index.html.twig', [
@@ -21,7 +21,7 @@ class ManagerController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_manager_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/manager/new', name: 'manager_list_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRepository $managerRepository): Response
     {
         $manager = new Manager();
@@ -30,7 +30,7 @@ class ManagerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $managerRepository->add($manager);
-            return $this->redirectToRoute('app_manager_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('manager_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('manager/new.html.twig', [
@@ -39,7 +39,7 @@ class ManagerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_manager_show', methods: ['GET'])]
+    #[Route('/admin/manager/{id}', name: 'manager_list_show', methods: ['GET'])]
     public function show(Manager $manager): Response
     {
         return $this->render('manager/show.html.twig', [
@@ -47,7 +47,7 @@ class ManagerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_manager_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/manager/{id}/edit', name: 'manager_list_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Manager $manager, ManagerRepository $managerRepository): Response
     {
         $form = $this->createForm(ManagerType::class, $manager);
@@ -55,7 +55,7 @@ class ManagerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $managerRepository->add($manager);
-            return $this->redirectToRoute('app_manager_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('manager_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('manager/edit.html.twig', [
@@ -64,13 +64,13 @@ class ManagerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_manager_delete', methods: ['POST'])]
+    #[Route('/admin/manager/{id}', name: 'manager_list_delete', methods: ['POST'])]
     public function delete(Request $request, Manager $manager, ManagerRepository $managerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$manager->getId(), $request->request->get('_token'))) {
             $managerRepository->remove($manager);
         }
 
-        return $this->redirectToRoute('app_manager_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('manager_list', [], Response::HTTP_SEE_OTHER);
     }
 }

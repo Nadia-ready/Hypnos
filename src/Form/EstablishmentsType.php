@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Establishments;
+use App\Entity\Manager;
 use App\Entity\Reservations;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -29,9 +29,9 @@ class EstablishmentsType extends AbstractType
                 'choice_label' => 'id',
                 'mapped' =>false,
             ])
-            ->add('user', EntityType::class, [
-                'class' =>User::class,
-                'choice_label' => 'lastname',
+            ->add('manager', EntityType::class, [
+                'class' =>Manager::class,
+                'choice_label' => 'name',
             ])
         ;
     }

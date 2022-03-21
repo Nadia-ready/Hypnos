@@ -25,8 +25,8 @@
                 <td>{{ manager.email }}</td>
                 <td>{{ manager.password }}</td>
                 <td>
-                    <a href="{{ path('app_manager_show', {'id': manager.id}) }}">show</a>
-                    <a href="{{ path('app_manager_edit', {'id': manager.id}) }}">edit</a>
+                    <a href="{{ path('manager_list_show', {'id': manager.id}) }}">show</a>
+                    <a href="{{ path('manager_list_edit', {'id': manager.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_manager_new') }}">Create new</a>
+    <a href="{{ path('manager_list_new') }}">Create new</a>
 {% endblock %}
