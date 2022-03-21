@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suites index{% endblock %}
+
+{% block body %}
+    <h1>Suites index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Cover</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Picture</th>
+                <th>Is_reserved</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suite in suites %}
+            <tr>
+                <td>{{ suite.id }}</td>
+                <td>{{ suite.title }}</td>
+                <td>{{ suite.cover }}</td>
+                <td>{{ suite.description }}</td>
+                <td>{{ suite.price }}</td>
+                <td>{{ suite.picture }}</td>
+                <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_suites_show', {'id': suite.id}) }}">show</a>
+                    <a href="{{ path('app_suites_edit', {'id': suite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_suites_new') }}">Create new</a>
+{% endblock %}

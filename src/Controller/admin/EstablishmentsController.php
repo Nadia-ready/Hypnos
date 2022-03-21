@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\gerant;
+namespace App\Controller\admin;
 
 use App\Entity\Establishments;
 use App\Form\EstablishmentsType;
@@ -13,15 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EstablishmentsController extends AbstractController
 {
-    #[Route('/gerant/establishments', name: 'establishments_list', methods: ['GET'])]
+    #[Route('/admin/establishments', name: 'establishments_list', methods: ['GET'])]
     public function index(EstablishmentsRepository $establishmentsRepository): Response
     {
-        return $this->render('gerant/establishments/index.html.twig', [
+        return $this->render('admin/establishments/index.html.twig', [
             'establishments' => $establishmentsRepository->findAll(),
         ]);
     }
 
-    #[Route('/gerant/establishments/new', name: 'establishments_list_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/establishments/new', name: 'establishments_list_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EstablishmentsRepository $establishmentsRepository): Response
     {
         $establishment = new Establishments();
@@ -33,21 +33,21 @@ class EstablishmentsController extends AbstractController
             return $this->redirectToRoute('establishments_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('gerant/establishments/new.html.twig', [
+        return $this->renderForm('admin/establishments/new.html.twig', [
             'establishment' => $establishment,
             'form' => $form,
         ]);
     }
 
-    #[Route('/gerant/establishments/{id}', name: 'establishments_list_show', methods: ['GET'])]
+    #[Route('/admin/establishments/{id}', name: 'establishments_list_show', methods: ['GET'])]
     public function show(Establishments $establishment): Response
     {
-        return $this->render('gerant/establishments/show.html.twig', [
+        return $this->render('admin/establishments/show.html.twig', [
             'establishment' => $establishment,
         ]);
     }
 
-    #[Route('/gerant/establishments/{id}/edit', name: 'establishments_list_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/establishments/{id}/edit', name: 'establishments_list_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Establishments $establishment, EstablishmentsRepository $establishmentsRepository): Response
     {
         $form = $this->createForm(EstablishmentsType::class, $establishment);
@@ -58,13 +58,13 @@ class EstablishmentsController extends AbstractController
             return $this->redirectToRoute('establishments_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('gerant/establishments/edit.html.twig', [
+        return $this->renderForm('admin/establishments/edit.html.twig', [
             'establishment' => $establishment,
             'form' => $form,
         ]);
     }
 
-    #[Route('/gerant/establishments/{id}', name: 'establishments_list_delete', methods: ['POST'])]
+    #[Route('/admin/establishments/{id}', name: 'establishments_list_delete', methods: ['POST'])]
     public function delete(Request $request, Establishments $establishment, EstablishmentsRepository $establishmentsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$establishment->getId(), $request->request->get('_token'))) {
