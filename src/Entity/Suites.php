@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SuitesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SuitesRepository::class)]
@@ -30,6 +32,17 @@ class Suites
 
     #[ORM\Column(type: 'boolean')]
     private $is_reserved;
+
+    #[ORM\ManyToOne(targetEntity: Establishments::class, inversedBy: 'suites')]
+    private $establishment;
+
+    #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'suite')]
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +117,45 @@ class Suites
     public function setIsReserved(bool $is_reserved): self
     {
         $this->is_reserved = $is_reserved;
+
+        return $this;
+    }
+
+    public function getEstablishment(): ?Establishments
+    {
+        return $this->establishment;
+    }
+
+    public function setEstablishment(?Establishments $establishment): self
+    {
+        $this->establishment = $establishment;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeSuite($this);
+        }
 
         return $this;
     }
