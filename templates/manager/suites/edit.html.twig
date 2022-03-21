@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Suites{% endblock %}
+
+{% block body %}
+    <h1>Edit Suites</h1>
+
+    {{ include('manager/suites/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('suites_list') }}">back to list</a>
+
+    {{ include('manager/suites/_delete_form.html.twig') }}
+{% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Suites</h1>
 
-    {{ include('suites/_form.html.twig') }}
+    {{ include('manager/suites/_form.html.twig') }}
 
-    <a href="{{ path('app_suites_index') }}">back to list</a>
+    <a href="{{ path('suites_list') }}">back to list</a>
 {% endblock %}

@@ -29,8 +29,8 @@
                 <td>{{ suite.picture }}</td>
                 <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_suites_show', {'id': suite.id}) }}">show</a>
-                    <a href="{{ path('app_suites_edit', {'id': suite.id}) }}">edit</a>
+                    <a href="{{ path('suites_list_show', {'id': suite.id}) }}">show</a>
+                    <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_suites_new') }}">Create new</a>
+    <a href="{{ path('suites_list_new') }}">Create new</a>
 {% endblock %}

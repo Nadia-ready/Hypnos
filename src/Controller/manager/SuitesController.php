@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\manager;
 
 use App\Entity\Suites;
 use App\Form\SuitesType;
@@ -10,18 +10,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/suites')]
+
 class SuitesController extends AbstractController
 {
-    #[Route('/', name: 'app_suites_index', methods: ['GET'])]
+    #[Route('/manager/suites', name: 'suites_list', methods: ['GET'])]
     public function index(SuitesRepository $suitesRepository): Response
     {
-        return $this->render('suites/index.html.twig', [
+        return $this->render('manager/suites/index.html.twig', [
             'suites' => $suitesRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_suites_new', methods: ['GET', 'POST'])]
+    #[Route('/manager/suites/new', name: 'suites_list_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SuitesRepository $suitesRepository): Response
     {
         $suite = new Suites();
@@ -30,24 +30,24 @@ class SuitesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $suitesRepository->add($suite);
-            return $this->redirectToRoute('app_suites_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('suites/new.html.twig', [
+        return $this->renderForm('manager/suites/new.html.twig', [
             'suite' => $suite,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_suites_show', methods: ['GET'])]
+    #[Route('/manager/suites/{id}', name: 'suites_list_show', methods: ['GET'])]
     public function show(Suites $suite): Response
     {
-        return $this->render('suites/show.html.twig', [
+        return $this->render('manager/suites/show.html.twig', [
             'suite' => $suite,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_suites_edit', methods: ['GET', 'POST'])]
+    #[Route('/manager/suites/{id}/edit', name: 'suites_list_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Suites $suite, SuitesRepository $suitesRepository): Response
     {
         $form = $this->createForm(SuitesType::class, $suite);
@@ -55,22 +55,22 @@ class SuitesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $suitesRepository->add($suite);
-            return $this->redirectToRoute('app_suites_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('suites/edit.html.twig', [
+        return $this->renderForm('manager/suites/edit.html.twig', [
             'suite' => $suite,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_suites_delete', methods: ['POST'])]
+    #[Route('/manager/suites/{id}', name: 'suites_list_delete', methods: ['POST'])]
     public function delete(Request $request, Suites $suite, SuitesRepository $suitesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$suite->getId(), $request->request->get('_token'))) {
             $suitesRepository->remove($suite);
         }
 
-        return $this->redirectToRoute('app_suites_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
     }
 }

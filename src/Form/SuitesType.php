@@ -2,8 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\Establishments;
+use App\Entity\Reservations;
 use App\Entity\Suites;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,14 +18,36 @@ class SuitesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('cover')
-            ->add('description')
-            ->add('price')
-            ->add('picture')
-            ->add('is_reserved')
-            ->add('establishment')
-            ->add('reservations')
+            ->add('title', TextType::class, [
+                'required' => true
+            ])
+            ->add('cover', UrlType::class, [
+                'required' => true
+            ] )
+            ->add('description', TextType::class, [
+                'required' => true
+            ])
+            ->add('price', NumberType::class, [
+                'required' => true
+            ])
+            ->add('picture', UrlType::class, [
+                'required' => true
+            ])
+            ->add('is_reserved',TextType::class, [
+                'required' => true
+    ])
+            ->add('establishment', EntityType::class, [
+                'class' => Establishments::class,
+                'choice_label' => 'name',
+                'required' => true,
+                'mapped' => false,
+            ])
+            ->add('reservations', EntityType::class, [
+                'class' => Reservations::class,
+                'choice_label' => 'id',
+                'required' => true,
+                'mapped' => false,
+            ])
         ;
     }
 
