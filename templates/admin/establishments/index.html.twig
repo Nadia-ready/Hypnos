@@ -1,41 +1,47 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Establishments index{% endblock %}
+{% block title %}Liste des établissements{% endblock %}
 
-{% block main %}
-    <h1>Establishments index</h1>
+{% block body %}
+    <h1>Liste des établissements</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>Address</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for establishment in establishments %}
-            <tr>
-                <td>{{ establishment.id }}</td>
-                <td>{{ establishment.name }}</td>
-                <td>{{ establishment.city }}</td>
-                <td>{{ establishment.address }}</td>
-                <td>{{ establishment.description }}</td>
-                <td>
-                    <a href="{{ path('establishments_list_show', {'id': establishment.id}) }}">show</a>
-                    <a href="{{ path('establishments_list_edit', {'id': establishment.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('establishments_list_new') }}">Create new</a>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Etablissements
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Ville</th>
+                        <th>Adresse</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for establishment in establishments %}
+                        <tr>
+                            <td>{{ establishment.name }}</td>
+                            <td>{{ establishment.city }}</td>
+                            <td>{{ establishment.address }}</td>
+                            <td>{{ establishment.description }}</td>
+                            <td>
+                                <a href="{{ path('establishments_list_show', {'id': establishment.id}) }}" class="btn btn-outline-info">Plus de détails</a>
+                                <a href="{{ path('establishments_list_edit', {'id': establishment.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            </td>
+                        </tr>
+
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="{{ path('establishments_list_new') }}" class="btn btn-info">Créer un nouvel établissement</a>
 {% endblock %}

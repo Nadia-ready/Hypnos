@@ -1,11 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}New Establishments{% endblock %}
+{% block title %}Nouveau établissement{% endblock %}
 
-{% block main %}
-    <h1>Create new Establishments</h1>
+{% block body %}
+    <h1>Créer un nouvel établissement</h1>
 
     {{ include('admin/establishments/_form.html.twig') }}
 
-    <a href="{{ path('establishments_list') }}">back to list</a>
+    <button class="btn btn-info">
+        <a href="{{ path('establishments_list') }}">Retour à la liste</a>
+    </button>
+
 {% endblock %}

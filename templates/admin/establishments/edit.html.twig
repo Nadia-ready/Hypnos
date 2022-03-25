@@ -1,13 +1,30 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit Establishments{% endblock %}
+{% block title %}Modifier l'établissement{% endblock %}
 
-{% block main %}
-    <h1>Edit Establishments</h1>
+{% block body %}
+    <h1>Modifier l'établissement</h1>
 
-    {{ include('admin/establishments/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('establishments_list') }}">back to list</a>
+        <div>
+            {{ include('admin/establishments/_form.html.twig') }}
+        </div>
+    <div class="btn-group">
+        <div>
+            <button class="btn btn-outline-info">{{ button_label|default('Enregister') }}</button>
 
-    {{ include('admin/establishments/_delete_form.html.twig') }}
+        </div>
+
+        <div>
+            {{ include('admin/establishments/_delete_form.html.twig') }}
+        </div>
+
+        <div>
+            <a href="{{ path('establishments_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+        </div>
+
+
+
+    </div>
+
 {% endblock %}
