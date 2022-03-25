@@ -84,7 +84,10 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Vous êtes connecté:</div>
-                    {{ app.user.lastname }} {{ app.user.firstname }}
+
+                </div>
+                <div class="sb-sidenav-footer">
+                     <a class="nav-link" href={{ path('app_logout') }}>Se déconnecter</a>
                 </div>
             </nav>
         </div>

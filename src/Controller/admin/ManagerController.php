@@ -16,7 +16,7 @@ class ManagerController extends AbstractController
     #[Route('/admin/manager', name: 'manager_list', methods: ['GET'])]
     public function index(ManagerRepository $managerRepository): Response
     {
-        return $this->render('manager/index.html.twig', [
+        return $this->render('admin/manager/index.html.twig', [
             'managers' => $managerRepository->findAll(),
         ]);
     }
@@ -33,7 +33,7 @@ class ManagerController extends AbstractController
             return $this->redirectToRoute('manager_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('manager/new.html.twig', [
+        return $this->renderForm('admin/manager/new.html.twig', [
             'manager' => $manager,
             'form' => $form,
         ]);
@@ -42,7 +42,7 @@ class ManagerController extends AbstractController
     #[Route('/admin/manager/{id}', name: 'manager_list_show', methods: ['GET'])]
     public function show(Manager $manager): Response
     {
-        return $this->render('manager/show.html.twig', [
+        return $this->render('admin/manager/show.html.twig', [
             'manager' => $manager,
         ]);
     }
@@ -58,7 +58,7 @@ class ManagerController extends AbstractController
             return $this->redirectToRoute('manager_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('manager/edit.html.twig', [
+        return $this->renderForm('admin/manager/edit.html.twig', [
             'manager' => $manager,
             'form' => $form,
         ]);

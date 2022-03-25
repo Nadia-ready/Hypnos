@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Manager{% endblock %}
+
+{% block body %}
+    <h1>Manager</h1>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Détails du manager
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ manager.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ manager.name }}</td>
+                </tr>
+                <tr>
+                    <th>Prénome</th>
+                    <td>{{ manager.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ manager.email }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ manager.password }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <div class="btn-group">
+        <div>
+            <a href="{{ path('manager_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+        </div>
+
+        <div>
+            <a href="{{ path('manager_list_edit', {'id': manager.id}) }}" class="btn btn-outline-info">Modifier</a>
+        </div>
+
+        {{ include('admin/manager/_delete_form.html.twig') }}
+    </div>
+
+
+
+
+
+{% endblock %}
