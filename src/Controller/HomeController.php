@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/establishments', name: 'Home', methods: ['GET'])]
+    #[Route('/home', name: 'Home', methods: ['GET'])]
     public function index(EstablishmentsRepository $establishmentsRepository): Response
     {
-        return $this->render('admin/establishments/index.html.twig', [
+        return $this->render('Home.html.twig', [
             'establishments' => $establishmentsRepository->findAll(),
         ]);
     }

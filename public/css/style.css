@@ -1,10 +1,58 @@
- body {
-     background-color: #D4F1F4;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Volkhov:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nunito+Sans:wght@300&family=Volkhov:ital@1&display=swap');
+
+
+
+ /*style image home*/
+
+ .thumbnail {
+     position: relative;
  }
 
- main {
-     background-color: #D4F1F4;
+ .caption {
+     position: absolute;
+     top: 45%;
+     left: 0;
+     width: 100%;
  }
+
+ .text-image-home {
+     color: black;
+     font-size: 3rem;
+     font-family: 'Volkhov', serif;
+ }
+
+ /*style dropdown home*/
+ #container-home {
+     width: 90%;
+     padding: 5rem;
+     margin: 5rem;
+     background-color: #98D7C2;
+     font-family: 'Nunito Sans', sans-serif;
+
+
+}
+
+ /*line h1*/
+h1 {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Volkhov', serif;
+
+}
+h1:before, h1:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+
+}
+h1:before {
+    margin-right: 10px
+}
+h1:after {
+    margin-left: 10px
+}
 
  /*mise en forme login*/
  .login{

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block body %}
+    <section>
+        <div class="row" id="box-search">
+            <div class="thumbnail text-center">
+                <img src="{{ asset('asset/image/Home/Principal2.jpg') }}" alt="" class="img-responsive">
+                <div class="caption">
+                    <p class="text-image-home">Votre week-end en amoureux en quelques clics</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <h1>
+            Découvrez nos établissements
+        </h1>
+        <div class="container-fluid" id="container-home">
+            <div class="dropdown">
+                <button class="btn btn-info btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Liste de nos établissements
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Dream Hotel (Lyon)</a>
+                    <a class="dropdown-item" href="#">Enchanted Garden (Paris)</a>
+                    <a class="dropdown-item" href="#">Welcome Hotel (Nantes)</a>
+                    <a class="dropdown-item" href="#">Always Welcome (Nice)</a>
+                    <a class="dropdown-item" href="#">Resort Hotel (Lille)</a>
+                    <a class="dropdown-item" href="#">Charm Hotel (Rennes)</a>
+                    <a class="dropdown-item" href="#">Yellow Hotel (Bordeaux)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h1>
+            Découvrir
+        </h1>
+
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <img src="{{ asset('asset/image/Home/breakfast.jpg') }}" class="card-img-top" alt="breakfast">
+                        <div class="card-body">
+                            <a href="#" class="btn btn-info">Découvrir</a>
+                        </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <img src="{{ asset('asset/image/Home/piscine.jpg') }}" class="card-img-top" alt="breakfast">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-info">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card">
+                        <img src="{{ asset('asset/image/Home/spa.jpg') }}" class="card-img-top" alt="breakfast">
+                        <div class="card-body">
+                            <a href="#" class="btn btn-info">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+{% endblock %}
