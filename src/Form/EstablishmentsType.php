@@ -29,10 +29,7 @@ class EstablishmentsType extends AbstractType
                 'choice_label' => 'id',
                 'mapped' =>false,
             ])
-            ->add('manager', EntityType::class, [
-                'class' =>Manager::class,
-                'choice_label' => 'name',
-            ])
+
         ;
     }
 

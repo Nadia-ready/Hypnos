@@ -33,8 +33,6 @@ class Establishments
     #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'establishment')]
     private $reservations;
 
-    #[ORM\ManyToOne(targetEntity: Manager::class, inversedBy: 'establishment')]
-    private $manager;
 
 
     public function __construct()
@@ -153,16 +151,6 @@ class Establishments
         return $this;
     }
 
-    public function getManager(): ?Manager
-    {
-        return $this->manager;
-    }
 
-    public function setManager(?Manager $manager): self
-    {
-        $this->manager = $manager;
-
-        return $this;
-    }
 
 }
