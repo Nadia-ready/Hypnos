@@ -1,9 +1,11 @@
 {% extends 'manager/base.html.twig' %}
 
-{% block title %}Suites index{% endblock %}
+{% block title %}Liste des suites{% endblock %}
 
-{% block main %}
-    <h1>Suites index</h1>
+{% block body %}
+    <h1>Liste des suites</h1>
+
+
 
     <table class="table">
         <thead>
@@ -20,19 +22,19 @@
         </thead>
         <tbody>
         {% for suite in suites %}
-            <tr>
-                <td>{{ suite.id }}</td>
-                <td>{{ suite.title }}</td>
-                <td>{{ suite.cover }}</td>
-                <td>{{ suite.description }}</td>
-                <td>{{ suite.price }}</td>
-                <td>{{ suite.picture }}</td>
-                <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('suites_list_show', {'id': suite.id}) }}">show</a>
-                    <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">edit</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ suite.id }}</td>
+                    <td>{{ suite.title }}</td>
+                    <td>{{ suite.cover }}</td>
+                    <td>{{ suite.description }}</td>
+                    <td>{{ suite.price }}</td>
+                    <td>{{ suite.picture }}</td>
+                    <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('suites_list_show', {'id': suite.id}) }}">show</a>
+                        <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">edit</a>
+                    </td>
+                </tr>
         {% else %}
             <tr>
                 <td colspan="8">no records found</td>

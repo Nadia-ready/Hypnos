@@ -39,9 +39,13 @@
                         <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
                     {% endif %}
                     {% if is_granted('ROLE_MANAGER') %}
-                        <a class="nav-link" href="{{path('establishments_list') }}">Gérer votre établissement</a>
+                        <a class="nav-link" href="{{path('suites_list') }}">Gérer votre établissement</a>
                     {% endif %}
-                    <a class="nav-link" href="#">Connexion</a>
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
