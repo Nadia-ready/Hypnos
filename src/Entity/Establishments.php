@@ -33,6 +33,9 @@ class Establishments
     #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'establishment')]
     private $reservations;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'establishment')]
+    private $user;
+
 
 
     public function __construct()
@@ -147,6 +150,18 @@ class Establishments
         if ($this->reservations->removeElement($reservation)) {
             $reservation->removeEstablishment($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
