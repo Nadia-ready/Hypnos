@@ -19,30 +19,30 @@
                     <th>Ville</th>
                     <th>Adresse</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    <th>Accès</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for establishment in establishments %}
-
                     <tr>
+
                         <td>{{ establishment.name }}</td>
                         <td>{{ establishment.city }}</td>
                         <td>{{ establishment.address }}</td>
                         <td>{{ establishment.description }}</td>
                         <td>
-                            <a href="{{ path('establishments_list_show', {'id': establishment.id}) }}" class="btn btn-outline-info">Plus de détails</a>
-                            <a href="{{ path('establishments_list_edit', {'id': establishment.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            <a href="{{ path('manager_establishments_list_show', {'id': establishment.id}) }}" class="btn btn-outline-info">Détails</a>
+
                         </td>
                     </tr>
-
-
-
                 {% endfor %}
+
+
                 </tbody>
             </table>
         </div>
     </div>
 
-    <a href="{{ path('establishments_list_new') }}" class="btn btn-info">Créer un nouvel établissement</a>
+
+
 {% endblock %}

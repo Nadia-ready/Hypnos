@@ -2,45 +2,63 @@
 
 {% block title %}Suites{% endblock %}
 
-{% block main %}
+{% block body %}
     <h1>Suites</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ suite.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ suite.title }}</td>
-            </tr>
-            <tr>
-                <th>Cover</th>
-                <td>{{ suite.cover }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ suite.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ suite.price }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ suite.picture }}</td>
-            </tr>
-            <tr>
-                <th>Is_reserved</th>
-                <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Détails de l'établissements
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ suite.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ suite.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cover</th>
+                        <td>{{ suite.cover }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ suite.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ suite.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Picture</th>
+                        <td>{{ suite.picture }}</td>
+                    </tr>
+                    <tr>
+                        <th>Is_reserved</th>
+                        <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <a href="{{ path('suites_list') }}">back to list</a>
+    <div class="btn-group">
+        <div>
+            <a href="{{ path('manager_suites_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+        </div>
 
-    <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">edit</a>
+        <div>
+            <a href="{{ path('suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+        </div>
 
-    {{ include('manager/suites/_delete_form.html.twig') }}
+        {{ include('manager/suites/_delete_form.html.twig') }}
+    </div>
+
+
+
+
 {% endblock %}

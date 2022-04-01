@@ -7,6 +7,7 @@ use App\Entity\Reservations;
 use App\Entity\Suites;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -30,10 +31,9 @@ class SuitesType extends AbstractType
             ->add('price', NumberType::class, [
                 'required' => true
             ])
-            ->add('picture', UrlType::class, [
-                'required' => true
-            ])
-            ->add('is_reserved',TextType::class, [
+
+            ->add('is_reserved',CheckboxType::class, [
+                'label' => 'Oui',
                 'required' => true
     ])
             ->add('establishment', EntityType::class, [
@@ -42,12 +42,7 @@ class SuitesType extends AbstractType
                 'required' => true,
                 'mapped' => false,
             ])
-            ->add('reservations', EntityType::class, [
-                'class' => Reservations::class,
-                'choice_label' => 'id',
-                'required' => true,
-                'mapped' => false,
-            ])
+
         ;
     }
 

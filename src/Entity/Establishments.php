@@ -100,7 +100,7 @@ class Establishments
     /**
      * @return Collection<int, Suites>
      */
-    public function getSuites(): Collection
+    public function getSuites(): Collection|null
     {
         return $this->suites;
     }

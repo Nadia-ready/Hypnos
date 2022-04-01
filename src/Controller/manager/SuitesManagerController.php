@@ -11,17 +11,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class SuitesController extends AbstractController
+class SuitesManagerController extends AbstractController
 {
-    #[Route('/manager/suites', name: 'suites_list', methods: ['GET'])]
+
+    #[Route('/manager/suites', name: 'manager_suites_list', methods: ['GET'])]
     public function index(SuitesRepository $suitesRepository): Response
     {
+
         return $this->render('manager/suites/index.html.twig', [
             'suites' => $suitesRepository->findAll(),
         ]);
     }
 
-    #[Route('/manager/suites/new', name: 'suites_list_new', methods: ['GET', 'POST'])]
+    #[Route('/manager/suites/new', name: 'manager_suites_list_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SuitesRepository $suitesRepository): Response
     {
         $suite = new Suites();
@@ -30,7 +32,7 @@ class SuitesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $suitesRepository->add($suite);
-            return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('manager_establishments_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('manager/suites/new.html.twig', [
@@ -55,7 +57,7 @@ class SuitesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $suitesRepository->add($suite);
-            return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('manager_establishments_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('manager/suites/edit.html.twig', [
@@ -71,6 +73,6 @@ class SuitesController extends AbstractController
             $suitesRepository->remove($suite);
         }
 
-        return $this->redirectToRoute('suites_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('manager_establishments_list', [], Response::HTTP_SEE_OTHER);
     }
 }

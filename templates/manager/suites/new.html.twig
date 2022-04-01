@@ -1,11 +1,14 @@
 {% extends 'manager/base.html.twig' %}
 
-{% block title %}New Suites{% endblock %}
+{% block title %}Nouvelle suite{% endblock %}
 
-{% block main %}
-    <h1>Create new Suites</h1>
+{% block body %}
+    <h1>Créer une nouvelle suite</h1>
 
     {{ include('manager/suites/_form.html.twig') }}
 
-    <a href="{{ path('suites_list') }}">back to list</a>
+    <button class="btn btn-outline-info">
+        <a href="{{ path('manager_establishments_list') }}">Retour à la liste</a>
+    </button>
+
 {% endblock %}

@@ -1,13 +1,26 @@
 {% extends 'manager/base.html.twig' %}
 
-{% block title %}Edit Suites{% endblock %}
+{% block title %}Modifier la suite{% endblock %}
 
-{% block main %}
-    <h1>Edit Suites</h1>
+{% block body %}
+    <h1>Modifier la suite</h1>
 
-    {{ include('manager/suites/_form.html.twig', {'button_label': 'Update'}) }}
+    <div>
+        {{ include('manager/suites/_form.html.twig') }}
+    </div>
+    <div class="btn-group">
+        <div>
+            <button class="btn btn-outline-info">{{ button_label|default('Enregister') }}</button>
 
-    <a href="{{ path('suites_list') }}">back to list</a>
+        </div>
 
-    {{ include('manager/suites/_delete_form.html.twig') }}
+        <div>
+            {{ include('manager/suites/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <div>
+        <a href="{{ path('manager_establishments_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+    </div>
+
 {% endblock %}

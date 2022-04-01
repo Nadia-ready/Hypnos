@@ -1,0 +1,54 @@
+{% extends 'manager/base.html.twig' %}
+
+{% block title %}Etablissements{% endblock %}
+
+{% block body %}
+    <h1>Etablissement</h1>
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Suites de l'établissement
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                <tr>
+                    <th>Suites</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Réserver</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                    {% for suite in establishment.suites %}
+                        <tr>
+                            <td>{{ suite.title }} </td>
+                            <td>{{ suite.description }} </td>
+                            <td>{{ suite.price }} </td>
+                            <td>
+                                {{ suite.isReserved ? 'Oui' : 'Non' }}
+                            </td>
+                            <td>
+                                <a href="{{ path('suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            </td>
+                            <td>
+
+                                <a href="{{ path('suites_list_delete', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+                            </td>
+
+                            {% endfor %}
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="{{ path('manager_suites_list_new') }}" class="btn btn-info">Créer un nouvel établissement</a>
+
+{% endblock %}

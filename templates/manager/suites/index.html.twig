@@ -5,43 +5,49 @@
 {% block body %}
     <h1>Liste des suites</h1>
 
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Cover</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Picture</th>
-                <th>Is_reserved</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for suite in suites %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Suites
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
                 <tr>
-                    <td>{{ suite.id }}</td>
-                    <td>{{ suite.title }}</td>
-                    <td>{{ suite.cover }}</td>
-                    <td>{{ suite.description }}</td>
-                    <td>{{ suite.price }}</td>
-                    <td>{{ suite.picture }}</td>
-                    <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
-                    <td>
-                        <a href="{{ path('suites_list_show', {'id': suite.id}) }}">show</a>
-                        <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">edit</a>
-                    </td>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Cover</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Is_reserved</th>
+                    <th>actions</th>
                 </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for suite in suites %}
+                    <tr>
+                        <td>{{ suite.id }}</td>
+                        <td>{{ suite.title }}</td>
+                        <td>{{ suite.cover }}</td>
+                        <td>{{ suite.description }}</td>
+                        <td>{{ suite.price }}</td>
+                        <td>{{ suite.picture }}</td>
+                        <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a href="{{ path('suites_list_show', {'id': suite.id}) }}">PLus de détails</a>
+                            <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <a href="{{ path('suites_list_new') }}">Create new</a>
+    <a href="{{ path('suites_list_new') }}">Créer une nouvelle suite</a>
 {% endblock %}
