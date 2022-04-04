@@ -33,7 +33,7 @@
                     <a class="nav-link active" aria-current="page" href="#" >Accueil</a>
                     <a class="nav-link" href="#">L'expérience Hypnos</a>
                     <a class="nav-link" href="{{ path('establishments_list') }}">Nos établissements</a>
-                    <a class="nav-link" href="{{ path('reservations_list') }}">Réserver</a>
+                    <a class="nav-link" href="{{ path('reservationsSuites') }}">Réserver</a>
                     <a class="nav-link" href="#">Contact</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
@@ -69,6 +69,6 @@
 </main>
 
 </body>
-
+<script src="{{ asset('JS/index.js') }}"></script>
 
 </html>

@@ -40,6 +40,7 @@ class EstablishmentsManagerController extends AbstractController
         return $this->render('manager/establishmentsShow.html.twig', [
             'establishment' => $establishment,
         ]);
+
     }
 
 

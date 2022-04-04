@@ -9,22 +9,22 @@
         <div>
             {{ include('admin/establishments/_form.html.twig') }}
         </div>
-    <div class="btn-group">
-        <div>
-            <button class="btn btn-outline-info">{{ button_label|default('Enregister') }}</button>
+            <div class="btn-group">
+                <div>
+                    <button class="btn btn-outline-info">{{ button_label|default('Enregister') }}</button>
 
-        </div>
+                </div>
 
-        <div>
-            {{ include('admin/establishments/_delete_form.html.twig') }}
-        </div>
+                <div>
+                    {{ include('admin/establishments/_delete_form.html.twig') }}
+                </div>
 
-        <div>
-            <a href="{{ path('establishments_list') }}" class="btn btn-outline-info">Retour à la liste</a>
-        </div>
+                <div>
+                    <a href="{{ path('establishments_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+                </div>
 
 
 
-    </div>
+            </div>
 
 {% endblock %}

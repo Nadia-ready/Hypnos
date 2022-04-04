@@ -39,7 +39,7 @@
                             </td>
                             <td>
 
-                                <a href="{{ path('suites_list_delete', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+                                <a href="{{ path('suites_list_delete', {'id': suite.id}) }}" class="btn btn-outline-info">Supprimer</a>
                             </td>
 
                             {% endfor %}
@@ -49,6 +49,6 @@
         </div>
     </div>
 
-    <a href="{{ path('manager_suites_list_new') }}" class="btn btn-info">Créer un nouvel établissement</a>
+    <a href="{{ path('manager_suites_list_new') }}" class="btn btn-info">Créer une nouvelle suite</a>
 
 {% endblock %}

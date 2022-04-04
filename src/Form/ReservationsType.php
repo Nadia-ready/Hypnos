@@ -28,9 +28,11 @@ class ReservationsType extends AbstractType
             ])
             ->add('establishment', EntityType::class, [
                 'class' => Establishments::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Establishments $establishments) {
+                    return $establishments->getName();
+                },
                 'required' => true,
-                'mapped' => false,
+                'multiple' => true,
             ])
             ->add('suite', EntityType::class, [
                 'class' => Suites::class,

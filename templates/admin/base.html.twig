@@ -32,7 +32,7 @@
                 <a class="nav-link active" aria-current="page" href="#" >Accueil</a>
                 <a class="nav-link" href="#">L'expérience Hypnos</a>
                 <a class="nav-link" href="{{ path('establishments_list') }}">Nos établissements</a>
-                <a class="nav-link" href="{{ path('reservations_list') }}">Réserver</a>
+                <a class="nav-link" href="{{ path('reservationsSuites') }}">Réserver</a>
                 <a class="nav-link" href="#">Contact</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
@@ -78,18 +78,31 @@
 
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href={{ path('manager_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href={{ path('admin_user_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Gérant
+                            Utilisateurs
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href={{ path('manager_list_new') }}>Créer un gérant</a>
-                                <a class="nav-link" href={{ path('manager_list') }}>Liste des gérants</a>
+                                <a class="nav-link" href={{ path('admin_user_new') }}>Créer un nouvel utilisateur</a>
+                                <a class="nav-link" href={{ path('admin_user_list') }}>Liste des utilisateurs</a>
 
                             </nav>
                         </div>
+                    </div>
+                    <a class="nav-link collapsed" href={{ path('manager_suites_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Suites
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href={{ path('manager_suites_list_new') }}>Créer une nouvelle suite</a>
+
+
+                        </nav>
+                    </div>
 
                 </div>
                 <div class="sb-sidenav-footer">
@@ -113,4 +126,5 @@
 </main>
 
 </body>
+<script src="{{ asset('JS/index.js') }}"></script>
 </html>
