@@ -1,0 +1,161 @@
+{% extends 'base.html.twig.' %}
+
+{% block title %} Réservations {% endblock %}
+
+{% block body %}
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 p-0" style="background-image: url(asset/image/carousel-1.jpg);">
+        <div class="container-fluid page-header-inner py-5">
+            <div class="container text-center pb-5">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Réservations</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="#">Etablissements</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Réservations</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Booking Start -->
+
+    <div class="container-fluid booking pb-5">
+        <div class="container">
+            <div class="bg-white shadow" style="padding: 35px;">
+                <form action="{{ path('reservationsSuites') }}" method="POST">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <div class="row g-2">
+                                <h2 class="text-center">Verifiez les disponibilités de nos suites</h2>
+                                <div class="col-md-4">
+                                    <div class="date" id="date1" data-target-input="nearest">
+                                        <input id="arrival_date"
+                                               type="date" class="form-control datetimepicker-input"
+                                               placeholder="Date d'arrivée" data-target="#date1"
+                                               data-toggle="datetimepicker"
+                                               name="arrival_date"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <input
+                                                id="departure_date"
+                                                type="date" class="form-control datetimepicker-input"
+                                                placeholder="Date de départ" data-target="#date2"
+                                                data-toggle="datetimepicker"
+                                                name="departure_date"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" name="establishment" id="establishment">
+                                        <option selected disabled>Etablissement</option>
+                                        {% for establishment in establishments %}
+                                            <option value="{{ establishment.id }}">
+                                                {{ establishment.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking End -->
+    <div id="thubmnails"></div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        let arrivalDateValue = null;
+        let departureDateValue = null;
+        let establishmentValue = null;
+
+        $("#arrival_date").change(() => {
+            arrivalDateValue = $("#arrival_date").val();
+            fetchSuites();
+        });
+
+        $("#departure_date").change(() => {
+            departureDateValue = $("#departure_date").val();
+            fetchSuites();
+        });
+
+        $("#establishment").change(() => {
+            establishmentValue = $("#establishment").val();
+            fetchSuites();
+        });
+
+
+
+        function filterSuites(suites = []) {
+            return suites.filter(({reservations = []}) => {
+                if(reservations.length === 0) return true;
+                let valid = true;
+                reservations.forEach(({arrival_date, departure_date}) => {
+                    console.log({arrival_date, departure_date, departureDateValue, arrivalDateValue});
+
+                    // Si la date de debut de resa est dans l'interval
+                    if(arrival_date >= arrivalDateValue && arrival_date <= departureDateValue) {
+                        valid = false;
+                    }
+
+                    // si la date de fin de resa est dans l'interval
+                    if(departure_date >= arrivalDateValue && departure_date <= departureDateValue) {
+                        valid = false;
+                    }
+
+                    // si les dates de la resa englobe l'interval
+                    if(arrival_date <= arrivalDateValue && departure_date >= departureDateValue) {
+                        valid = false;
+                    }
+                });
+
+                return valid;
+            })
+        }
+
+        function fetchSuites() {
+            if (arrivalDateValue && departureDateValue && establishmentValue) {
+                // do ajax call
+                $.get("api/suites", {'establishment.id': establishmentValue})
+                    .done((data) => {
+                        const suites = data['hydra:member'];
+                        const reservableSuites = filterSuites(suites);
+                        console.log({suites, reservableSuites});
+                        $("#thubmnails").html('');
+                        reservableSuites.forEach((suite) => {
+                           generateThumbnailHTML(suite);
+                        });
+                    })
+                    .fail((err) => {
+                        alert(err);
+                    });
+            }
+        }
+
+        function generateThumbnailHTML(suite) {
+            const url = "{{ path('thumbnail', {'id': '_id_'}) }}".replace('_id_', suite.id);
+            console.log({suite, url});
+            $.get(url).done((html) => {
+                $("#thubmnails").append(html);
+            });
+        }
+
+
+
+    </script>
+{% endblock %}
