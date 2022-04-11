@@ -22,7 +22,8 @@ class SuitesType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true
             ])
-            ->add('cover', UrlType::class, [
+            ->add('cover', FileType::class, [
+                'label' => 'Image',
                 'required' => true
             ] )
             ->add('description', TextType::class, [
