@@ -11,87 +11,14 @@
                 <h6 class="section-title text-center text-primary text-uppercase">Regarder nos établissements</h6>
                 <h1 class="mb-5">Réservez une <span class="text-primary text-uppercase">Luxieuse suite</span></h1>
             </div>
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="row g-3">
-                        <div class="col-6 text-end">
-                            <img class="img-fluid rounded w-75"
-                                 src={{ asset('asset/image/Home/reservations/receptionniste.jpg') }} style="margin-top:
-                                 25%;">
-                        </div>
-                        <div class="col-6 text-start">
-                            <img class="img-fluid rounded w-100n" src={{ asset('asset/image/Home/room/chambre1.jpg') }}>
-                        </div>
-                        <div class="col-6 text-end">
-                            <img class="img-fluid rounded w-50"
-                                 src={{ asset('asset/image/Home/piscine/piscine3.jpg') }}>
-                        </div>
-                        <div class="col-6 text-start">
-                            <img class="img-fluid rounded w-75"
-                                 src={{ asset('asset/image/Home/service/breakfast.jpg') }}>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input id="lastname" type="text" class="form-control" placeholder="Votre nom">
-                                    <label for="name">Votre nom</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                    <label for="email">Votre Email</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="date" class="form-control datetimepicker-input" id="arrival_date"
-                                           placeholder="Date d'arrivée" data-target="#date3" data-toggle="datetimepicker"/>
-                                    <label for="checkin">Date d'arrivée</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating date" id="date4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" id="departure_date"
-                                           placeholder="Date de départ" data-target="#date4" data-toggle="datetimepicker"/>
-                                    <label for="checkout">Date de départ</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <select class="form-select" name="establisment" id="establishmentList">
-                                        <option selected disabled>Etablissement</option>
-                                        {% for establishment in establishments %}
-                                            <option value="{{ establishment.id }}">
-                                                {{ establishment.name }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
-                                    <label for="select2">Selectionner votre établissement</label>
-                                </div>
-                            </div>
 
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <select class="form-select" id="select3">
-                                        <option value="1">Suite 1</option>
-                                        <option value="2">Suite 2</option>
-                                        <option value="3">Suite 3</option>
-                                    </select>
-                                    <label for="select3">Sélectionner une suite</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Réserver maintenant</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% if is_granted('ROLE_USER') %}
+                {{ include('reservations/_form.html.twig') }}
+             {% else %}
+                 <div class="small"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>
+            {% endif %}
+
+
         </div>
     </div>
     <!-- Booking End -->

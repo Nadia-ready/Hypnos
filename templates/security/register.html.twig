@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card shadow-lg m-auto">
+        <div class="card-header">Inscrivez-vous</div>
+        <div class="card-body">
+            <form method="post">
+                {{ form_start(form) }}
+                {{ form_row(form.email, {'label': "E-mail",'attr': {'size': 30, 'class': 'form-control-lg'}}) }}
+                {{ form_row(form.password, {'label': "Mot de passe",'attr': {'size': 30, 'class': 'form-control-lg'}}) }}
+                {{ form_row(form.firstname, {'label': "Prénom",'attr': {'size': 30, 'class': 'form-control-lg'}}) }}
+                {{ form_row(form.lastname, {'label': "Nom",'attr': {'size': 30, 'class': 'form-control-lg'}}) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-lg btn-primary" type="submit">S'enregistrer</button>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
