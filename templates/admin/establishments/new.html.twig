@@ -7,8 +7,17 @@
 
     {{ include('admin/establishments/_form.html.twig') }}
 
-    <button class="btn btn-outline-info">
-        <a href="{{ path('establishments_list') }}">Retour à la liste</a>
-    </button>
+    <div class="btn-group">
+        <div>
+            <button class="btn btn-outline-info">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+
+        <div>
+            <a href="{{ path('establishments_list') }}">Retour à la liste</a>
+        </div>
+
+
+    </div>
+
 
 {% endblock %}

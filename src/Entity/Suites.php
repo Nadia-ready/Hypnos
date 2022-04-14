@@ -46,9 +46,14 @@ class Suites
     #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'suite')]
     private $reservations;
 
+    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: ImagesSuites::class)]
+    private $image;
+
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,4 +171,35 @@ class Suites
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, ImagesSuites>
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(ImagesSuites $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImagesSuites $image): self
+    {
+        if ($this->image->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getSuite() === $this) {
+                $image->setSuite(null);
+            }
+        }
+
+        return $this;
+    }
 }
+

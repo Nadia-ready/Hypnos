@@ -6,5 +6,17 @@
     </div>
     <div class="card-body">
         {{ form_widget(form) }}
-         <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+        {# if route is "suites_edit show images #}
+        {% if app.request.attributes.get('_route') == 'suites_list_delete' %}
+
+            {% for image in suite.image %}
+                <div>
+                    <img src="{{ asset('/uploads/'~images.name) }}" alt="" width="150">
+
+                    {# We add a link to delete an image (will be managed in Ajax) #}
+                    <a href="{{ path('suites_delete_image', {id: images.id})}}" data-delete data-token="{{ csrf_token('delete' ~ images.id )}}">Supprimer</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+         <button class="btn btn-outline-info">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

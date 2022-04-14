@@ -8,6 +8,7 @@ use App\Entity\Suites;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -22,10 +23,6 @@ class SuitesType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true
             ])
-            ->add('cover', FileType::class, [
-                'label' => 'Image',
-                'required' => true
-            ] )
             ->add('description', TextType::class, [
                 'required' => true
             ])
@@ -33,15 +30,18 @@ class SuitesType extends AbstractType
                 'required' => true
             ])
 
-            ->add('is_reserved',CheckboxType::class, [
-                'label' => 'Oui',
-                'required' => true
-    ])
+
             ->add('establishment', EntityType::class, [
                 'class' => Establishments::class,
                 'choice_label' => 'name',
                 'required' => true,
                 'mapped' => false,
+            ])
+            ->add('image', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
             ])
 
         ;

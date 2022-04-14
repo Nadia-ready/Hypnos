@@ -12,7 +12,7 @@
                 <h1 class="mb-5">Réservez une <span class="text-primary text-uppercase">Luxieuse suite</span></h1>
             </div>
 
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 {{ include('reservations/_form.html.twig') }}
              {% else %}
                  <div class="small"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>

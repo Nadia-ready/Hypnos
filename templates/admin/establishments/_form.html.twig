@@ -7,4 +7,16 @@
     <div class="card-body">
     {{ form_widget(form) }}
 
+        {# if route is "establishment_edit show images #}
+        {% if app.request.attributes.get('_route') == 'establishments_list_edit' %}
+            {% for image in establishment.image %}
+                <div>
+                    <img src="{{ asset('/uploads/'~images.name) }}" alt="" width="150">
+
+                    {# We add a link to delete an image (will be managed in Ajax) #}
+                    <a href="{{ path('establishments_list_delete', {id: images.id})}}" data-delete data-token="{{ csrf_token('delete' ~ images.id )}}">Supprimer</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <button class="btn btn-outline-info">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

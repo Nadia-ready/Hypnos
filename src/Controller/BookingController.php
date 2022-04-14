@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservations;
 use App\Entity\Suites;
+use App\Entity\User;
 use App\Form\ReservationsType;
 use App\Repository\EstablishmentsRepository;
 use App\Repository\ReservationsRepository;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class BookingController extends AbstractController
 {
@@ -19,7 +21,7 @@ class BookingController extends AbstractController
     #[Route('/reservationsSuites', name: 'reservationsSuites', methods: ['GET', 'POST'])]
     public function reservationsSuites(ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository): Response
     {
-        return $this->render('reservations/bookingShow.html.twig', [
+        return $this->render('bookingShowAjax.html.twig', [
             'reservations' => $reservationsRepository->findAll(),
             'establishments' => $establishmentsRepository->findAll()
         ]);
@@ -51,5 +53,19 @@ class BookingController extends AbstractController
 
             'user' => $userRepository->findAll(),
         ]);
+    }
+
+    protected User $user;
+    public function __construct(Security $security) {
+        $this->user = $security->getUser();
+    }
+
+    #[Route('/bookingShowCustomer', name: 'bookingShowCustomer', methods: ['GET', 'POST'])]
+    public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository): Response
+    {
+        return $this->render('reservations/bookingShowCustomer.html.twig', [
+            'reservations' => $this->user->getEstablishment(),
+        ]);
+
     }
 }

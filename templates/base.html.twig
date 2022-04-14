@@ -42,10 +42,12 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="#" >Accueil</a>
-                    <a class="nav-link" href="#">L'expérience Hypnos</a>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <a class="nav-link" href="{{ path('bookingShowCustomer') }}">Mes réservations</a>
+                    {% endif %}
                     <a class="nav-link" href="{{ path('customer_establishments_list') }}">Nos établissements</a>
                     <a class="nav-link" href="{{ path('reservationsSuites') }}">Réserver</a>
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href={{ path('contact') }}>Contact</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
                     {% endif %}
@@ -60,15 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <form class="d-flex"
-                  action=href="#">
-                <label for="q">Rechercher un établissement</label>
-                <input class="form-control me-2" type="search" name="q" placeholder="Chercher une mission" aria-label="Search">
-                <button class="btn btn-outline-success"
-                        type="submit">Search</button>
-            </form>
-        </div>
+
     </nav>
 </header>
 <main class="row align-items-center py-3 py-md-0">

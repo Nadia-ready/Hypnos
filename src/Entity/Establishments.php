@@ -38,12 +38,18 @@ class Establishments
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'establishment')]
     private $user;
 
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ImagesEstablishments::class)]
+    private $image;
+
+
 
 
     public function __construct()
     {
         $this->suites = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->image = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -167,6 +173,38 @@ class Establishments
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, ImagesEstablishments>
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(ImagesEstablishments $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImagesEstablishments $image): self
+    {
+        if ($this->image->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getEstablishment() === $this) {
+                $image->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 
 

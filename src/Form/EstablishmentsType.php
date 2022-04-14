@@ -7,6 +7,7 @@ use App\Entity\Manager;
 use App\Entity\Reservations;
 use App\Entity\Suites;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,17 +26,12 @@ class EstablishmentsType extends AbstractType
                 'required' => true])
             ->add('description', TextType::class, [
                 'required' => true])
-            ->add('reservations', EntityType::class, [
-                'class' =>Reservations::class,
-                'choice_label' => 'id',
-                'mapped' =>false])
-            ->add('suites', EntityType::class, [
-                'class' => Suites::class,
-                'choice_label' => function (Suites $suites) {
-                    return $suites->getTitle();
-                },
-                'required' =>true,
-                'multiple' => true
+
+            ->add('image', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
             ])
 
         ;
