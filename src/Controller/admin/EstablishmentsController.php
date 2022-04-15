@@ -47,7 +47,7 @@ class EstablishmentsController extends AbstractController
                 );
 
                 // On crée l'image dans la base de données
-                $img = new ImagesSuites();
+                $img = new ImagesEstablishments();
                 $img->setName($fichier);
                 $establishment->addImage($img);
             }
@@ -69,8 +69,12 @@ class EstablishmentsController extends AbstractController
     #[Route('/admin/establishments/{id}', name: 'establishments_list_show', methods: ['GET'])]
     public function show(Establishments $establishment): Response
     {
+
+
         return $this->render('admin/establishments/show.html.twig', [
             'establishment' => $establishment,
+            'mainImage' => $establishment->getMainImage(),
+            'images' => $establishment->getImages(),
         ]);
     }
 
@@ -111,6 +115,8 @@ class EstablishmentsController extends AbstractController
 
         return $this->renderForm('admin/establishments/edit.html.twig', [
             'establishment' => $establishment,
+            'mainImage' => $establishment->getMainImage(),
+            'images' => $establishment->getImages(),
             'form' => $form,
         ]);
     }

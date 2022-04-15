@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
@@ -25,7 +26,7 @@ class ContactType extends AbstractType
                 'attr' => ['rows' => 6],
                 'required' => true])
 
-            ->add('subject', ChoiceType::class,[
+            /*->add('subject', ChoiceType::class,[
                 'choices' => [
                     new Subject('Je souhaite poser une réclamation'),
                     new Subject('Je souhaite commander un service supplémentaire'),
@@ -33,15 +34,15 @@ class ContactType extends AbstractType
                     new Subject('J\'ai un soucis avec cette application'),
                 ]
 
-            ])
+            ])*/
 
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Establishments::class,
+
         ]);
     }
 }

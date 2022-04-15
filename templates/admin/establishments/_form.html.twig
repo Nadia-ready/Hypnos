@@ -9,12 +9,12 @@
 
         {# if route is "establishment_edit show images #}
         {% if app.request.attributes.get('_route') == 'establishments_list_edit' %}
-            {% for image in establishment.image %}
+            {% for image in images %}
                 <div>
-                    <img src="{{ asset('/uploads/'~images.name) }}" alt="" width="150">
+                    <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}">
 
                     {# We add a link to delete an image (will be managed in Ajax) #}
-                    <a href="{{ path('establishments_list_delete', {id: images.id})}}" data-delete data-token="{{ csrf_token('delete' ~ images.id )}}">Supprimer</a>
+                    {# <a href="{{ path('establishments_list_delete', {id: mainImage.id})}}" data-delete data-token="{{ csrf_token('delete' ~ images.id )}}">Supprimer</a> #}
                 </div>
             {% endfor %}
         {% endif %}

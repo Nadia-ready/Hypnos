@@ -43,17 +43,19 @@ class Suites
     #[ORM\ManyToOne(targetEntity: Establishments::class, inversedBy: 'suites')]
     private $establishment;
 
-    #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'suite')]
-    private $reservations;
 
     #[ORM\OneToMany(mappedBy: 'suite', targetEntity: ImagesSuites::class)]
     private $image;
 
+    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: Reservations::class)]
+    private $reservations;
+
 
     public function __construct()
     {
-        $this->reservations = new ArrayCollection();
+
         $this->image = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,32 +147,7 @@ class Suites
         return $this;
     }
 
-    /**
-     * @return Collection<int, Reservations>
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
 
-    public function addReservation(Reservations $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
-            $reservation->addSuite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reservations $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            $reservation->removeSuite($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ImagesSuites>
@@ -196,6 +173,36 @@ class Suites
             // set the owning side to null (unless already changed)
             if ($image->getSuite() === $this) {
                 $image->setSuite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getSuite() === $this) {
+                $reservation->setSuite(null);
             }
         }
 

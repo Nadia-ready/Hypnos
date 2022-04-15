@@ -31,14 +31,12 @@ class ReservationsType extends AbstractType
                 'choice_label' => function (Establishments $establishments) {
                     return $establishments->getName();
                 },
-                'required' => true,
-                'multiple' => true,
+                'required' => true
             ])
             ->add('suite', EntityType::class, [
                 'class' => Suites::class,
                 'choice_label' => 'title',
-                'required' => true,
-                'mapped' => false,
+                'required' => true
             ])
         ;
     }

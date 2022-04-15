@@ -32,14 +32,15 @@ class Establishments
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Suites::class)]
     private $suites;
 
-    #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'establishment')]
-    private $reservations;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'establishment')]
     private $user;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ImagesEstablishments::class)]
-    private $image;
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: ImagesEstablishments::class, cascade: ['persist'])]
+    private $images;
+
+    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Reservations::class)]
+    private $reservations;
 
 
 
@@ -48,7 +49,7 @@ class Establishments
     {
         $this->suites = new ArrayCollection();
         $this->reservations = new ArrayCollection();
-        $this->image = new ArrayCollection();
+        $this->images = new ArrayCollection();
 
     }
 
@@ -138,6 +139,69 @@ class Establishments
     /**
      * @return Collection<int, Reservations>
      */
+
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user = $user;
+            $user->addEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            $user->removeEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImagesEstablishments>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function getMainImage() {
+        return $this->images->get(array_rand($this->images->toArray()));
+    }
+
+    public function addImage(ImagesEstablishments $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setEstablishment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImagesEstablishments $image): self
+    {
+        if ($this->images->removeElement($image) ){
+            // set the owning side to null (unless already changed)
+            if ($image->getEstablishment() === $this) {
+                $image->setEstablishment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
     public function getReservations(): Collection
     {
         return $this->reservations;
@@ -147,7 +211,7 @@ class Establishments
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations[] = $reservation;
-            $reservation->addEstablishment($this);
+            $reservation->setEstablishment($this);
         }
 
         return $this;
@@ -156,48 +220,9 @@ class Establishments
     public function removeReservation(Reservations $reservation): self
     {
         if ($this->reservations->removeElement($reservation)) {
-            $reservation->removeEstablishment($this);
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ImagesEstablishments>
-     */
-    public function getImage(): Collection
-    {
-        return $this->image;
-    }
-
-    public function addImage(ImagesEstablishments $image): self
-    {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
-            $image->setEstablishment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(ImagesEstablishments $image): self
-    {
-        if ($this->image->removeElement($image)) {
             // set the owning side to null (unless already changed)
-            if ($image->getEstablishment() === $this) {
-                $image->setEstablishment(null);
+            if ($reservation->getEstablishment() === $this) {
+                $reservation->setEstablishment(null);
             }
         }
 

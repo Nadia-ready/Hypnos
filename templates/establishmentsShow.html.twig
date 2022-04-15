@@ -15,6 +15,10 @@
         </div>
     </div>
 
+    <div>
+        {{ include('reservations/bookingShowAjax.html.twig', {'establishments': [establishment]}) }}
+    </div>
+
     {% for suite in establishment.suites %}
         <div class="container-fluid booking pb-5">
             <div class="container">

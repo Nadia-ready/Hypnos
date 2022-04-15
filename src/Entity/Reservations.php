@@ -26,11 +26,13 @@ class Reservations
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservations')]
     private $user;
 
-    #[ORM\ManyToMany(targetEntity: Establishments::class, inversedBy: 'reservations')]
+    #[ORM\ManyToOne(targetEntity: Establishments::class, inversedBy: 'reservations')]
     private $establishment;
 
-    #[ORM\ManyToMany(targetEntity: Suites::class, inversedBy: 'reservations')]
+    #[ORM\ManyToOne(targetEntity: Suites::class, inversedBy: 'reservations')]
     private $suite;
+
+
 
     public function __construct()
     {
@@ -79,53 +81,30 @@ class Reservations
         return $this;
     }
 
-    /**
-     * @return Collection<int, Establishments>
-     */
-    public function getEstablishment(): Collection
+    public function getEstablishment(): ?Establishments
     {
         return $this->establishment;
     }
 
-    public function addEstablishment(Establishments $establishment): self
+    public function setEstablishment(?Establishments $establishment): self
     {
-        if (!$this->establishment->contains($establishment)) {
-            $this->establishment[] = $establishment;
-        }
+        $this->establishment = $establishment;
 
         return $this;
     }
 
-    public function removeEstablishment(Establishments $establishment): self
-    {
-        $this->establishment->removeElement($establishment);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Suites>
-     */
-    public function getSuite(): Collection
+    public function getSuite(): ?Suites
     {
         return $this->suite;
     }
 
-    public function addSuite(Suites $suite): self
+    public function setSuite(?Suites $suite): self
     {
-        if (!$this->suite->contains($suite)) {
-            $this->suite[] = $suite;
-        }
+        $this->suite = $suite;
 
         return $this;
     }
 
-    public function removeSuite(Suites $suite): self
-    {
-        $this->suite->removeElement($suite);
-
-        return $this;
-    }
 
 
 }

@@ -13,26 +13,40 @@
         <div class="card-body">
             <table id="datatablesSimple">
                 <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ establishment.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nom</th>
-                        <td>{{ establishment.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Ville</th>
-                        <td>{{ establishment.city }}</td>
-                    </tr>
-                    <tr>
-                        <th>Adresse</th>
-                        <td>{{ establishment.address }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ establishment.description }}</td>
-                    </tr>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ establishment.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ establishment.name }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ establishment.city }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ establishment.address }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ establishment.description }}</td>
+                </tr>
+                <tr>
+                    <th>Image Principal</th>
+                    <td>
+                        <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Galerie d'images</th>
+                    <td>
+                        {% for image in images %}
+                            <img src={{ asset(image) }} alt="Image">
+                        {% endfor %}
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
