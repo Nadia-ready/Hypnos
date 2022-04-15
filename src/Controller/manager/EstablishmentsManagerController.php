@@ -35,8 +35,6 @@ class EstablishmentsManagerController extends AbstractController
     #[Route('/manager/establishments/{id}', name: 'manager_establishments_list_show', methods: ['GET'])]
     public function show(Establishments $establishment): Response
     {
-
-
         return $this->render('manager/establishmentsShow.html.twig', [
             'establishment' => $establishment,
         ]);

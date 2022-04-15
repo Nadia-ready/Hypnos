@@ -5,16 +5,20 @@ namespace App\Controller;
 use App\Entity\Reservations;
 use App\Form\ReservationsType;
 use App\Repository\ReservationsRepository;
+use App\Validator\ReservationDelete;
+use App\Validator\ReservationDeleteValidator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 class ReservationsController extends AbstractController
 {
     #[Route('/reservations', name: 'reservations_list', methods: ['GET'])]
-    public function index(ReservationsRepository $reservationsRepository): Response
+    public function index(ReservationsRepository $reservationsRepository, Session $session): Response
     {
         return $this->render('reservations/index.html.twig', [
             'reservations' => $reservationsRepository->findAll(),
@@ -65,9 +69,15 @@ class ReservationsController extends AbstractController
     }
 
     #[Route('/reservations/{id}', name: 'reservations_list_delete', methods: ['POST'])]
-    public function delete(Request $request, Reservations $reservation, ReservationsRepository $reservationsRepository): Response
+    public function delete(Request $request, Reservations $reservation, ReservationsRepository $reservationsRepository, ReservationDeleteValidator $validator): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
+
+            if (!$validator->validate($reservation, new ReservationDelete())) {
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+            }
+
             $reservationsRepository->remove($reservation);
         }
 

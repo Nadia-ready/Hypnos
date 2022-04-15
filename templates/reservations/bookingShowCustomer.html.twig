@@ -12,6 +12,7 @@
             <th>Id</th>
             <th>Arrival_date</th>
             <th>Departure_date</th>
+            <th>Annuler</th>
         </tr>
         </thead>
         <tbody>
@@ -21,8 +22,8 @@
                 <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('reservations_list_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('reservations_list_edit', {'id': reservation.id}) }}">edit</a>
+                    {{ include('reservations/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}

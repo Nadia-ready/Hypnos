@@ -66,7 +66,18 @@
     </nav>
 </header>
 <main class="row align-items-center py-3 py-md-0">
-    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 80px;padding-bottom: 40px" >
+    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 40px;padding-bottom: 40px" >
+
+        {% set errors = app.session.flashbag.get('errors', []) %}
+        {% if errors is not empty  %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in errors %}
+                    <p class="mb-0">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
         {% block body %}
 
         {% endblock %}
