@@ -41,7 +41,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#" >Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('Home') }}" >Accueil</a>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a class="nav-link" href="{{ path('bookingShowCustomer') }}">Mes réservations</a>
                     {% endif %}
@@ -66,7 +66,7 @@
     </nav>
 </header>
 <main class="row align-items-center py-3 py-md-0">
-    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 40px;padding-bottom: 40px" >
+    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 0px;padding-bottom: 40px" >
 
         {% set errors = app.session.flashbag.get('errors', []) %}
         {% if errors is not empty  %}
@@ -81,6 +81,9 @@
         {% block body %}
 
         {% endblock %}
+
+
+
     </div>
 </main>
 

@@ -3,7 +3,49 @@
 {% block title %}Suites{% endblock %}
 
 {% block body %}
-    <h1>Les suites</h1>
+    <h1> Détails de mon établissement</h1>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ establishment.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ establishment.name }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ establishment.city }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ establishment.address }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ establishment.description }}</td>
+            </tr>
+            <tr>
+                <th>Image Principal</th>
+                <td>
+                    <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}" width="300rem">
+                </td>
+            </tr>
+            <tr>
+                <th>Galerie d'images</th>
+                <td>
+                    {% for image in images %}
+                        <img src={{ asset(image) }} alt="Image" width="300rem">
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Les suites</h2>
 
 
     <div class="card mb-4">
@@ -31,6 +73,8 @@
                             <td>{{ suite.description }} </td>
                             <td>{{ suite.price }} </td>
 
+
+
                             <td>
                                 <a href="{{ path('suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
                             </td>
@@ -42,6 +86,7 @@
                             {% endfor %}
                         </tr>
                 </tbody>
+
             </table>
         </div>
     </div>

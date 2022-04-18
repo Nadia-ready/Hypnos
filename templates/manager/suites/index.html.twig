@@ -19,8 +19,6 @@
                     <th>Cover</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Picture</th>
-                    <th>Is_reserved</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -32,8 +30,7 @@
                         <td>{{ suite.cover }}</td>
                         <td>{{ suite.description }}</td>
                         <td>{{ suite.price }}</td>
-                        <td>{{ suite.picture }}</td>
-                        <td>{{ suite.isReserved ? 'Yes' : 'No' }}</td>
+                        
                         <td>
                             <a href="{{ path('suites_list_show', {'id': suite.id}) }}">PLus de détails</a>
                             <a href="{{ path('suites_list_edit', {'id': suite.id}) }}">Modifier</a>

@@ -7,6 +7,7 @@ use App\Entity\ImagesSuites;
 use App\Entity\Suites;
 use App\Form\SuitesType;
 use App\Repository\SuitesRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,7 @@ class SuitesManagerController extends AbstractController
     }
 
     #[Route('/manager/suites/new', name: 'manager_suites_list_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SuitesRepository $suitesRepository): Response
+    public function new(Request $request, SuitesRepository $suitesRepository, ManagerRegistry $doctrine): Response
     {
         $suite = new Suites();
         $form = $this->createForm(SuitesType::class, $suite);
@@ -53,7 +54,7 @@ class SuitesManagerController extends AbstractController
                 $suite->addImage($img);
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($suite);
             $entityManager->flush();
 
@@ -76,13 +77,13 @@ class SuitesManagerController extends AbstractController
     }
 
     #[Route('/manager/suites/{id}/edit', name: 'suites_list_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Suites $suite, SuitesRepository $suitesRepository): Response
+    public function edit(Request $request, Suites $suite, SuitesRepository $suitesRepository, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(SuitesType::class, $suite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $images = $form->get('images')->getData();
+            $images = $form->get('image')->getData();
 
             // On boucle sur les images
             foreach($images as $image){
@@ -101,7 +102,7 @@ class SuitesManagerController extends AbstractController
                 $suite->addImage($img);
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($suite);
             $entityManager->flush();
 

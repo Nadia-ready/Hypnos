@@ -29,6 +29,7 @@ class EstablishmentsManagerController extends AbstractController
 
         return $this->render('manager/establishments.html.twig', [
             'establishments' => $this->user->getEstablishment(),
+
         ]);
     }
 
@@ -37,6 +38,8 @@ class EstablishmentsManagerController extends AbstractController
     {
         return $this->render('manager/establishmentsShow.html.twig', [
             'establishment' => $establishment,
+            'mainImage' => $establishment->getMainImage(),
+            'images' => $establishment->getImages(),
         ]);
 
     }

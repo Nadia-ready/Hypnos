@@ -20,6 +20,8 @@ class SuitesController extends AbstractController
     {
         return $this->render('suitesShow.html.twig', [
             'suite' => $suite,
+            'mainImage' =>$suite->getMainImage(),
+            'images' =>$suite->getImages(),
         ]);
     }
 }

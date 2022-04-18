@@ -47,4 +47,8 @@ class ImagesSuites
 
         return $this;
     }
+
+    public function __toString() {
+        return "/uploads/" . $this->name;
+    }
 }

@@ -22,19 +22,20 @@ class ContactType extends AbstractType
                 'required' => true])
             ->add('email', TextType::class, [
                 'required' => true])
+            ->add('subject', ChoiceType::class,[
+                'choices' => [
+                    'Je souhaite poser une réclamation'=>'Je souhaite poser une réclamation',
+                    'Je souhaite commander un service supplémentaire'=>'Je souhaite commander un service supplémentaire',
+                    'Je souhaite en savoir plus sur une suite'=>'Je souhaite en savoir plus sur une suite',
+                    'J\'ai un soucis avec cette application'=>'J\'ai un soucis avec cette application',
+                ]
+
+            ])
             ->add('message', TextareaType::class, [
                 'attr' => ['rows' => 6],
                 'required' => true])
 
-            /*->add('subject', ChoiceType::class,[
-                'choices' => [
-                    new Subject('Je souhaite poser une réclamation'),
-                    new Subject('Je souhaite commander un service supplémentaire'),
-                    new Subject('Je souhaite en savoir plus sur une suite'),
-                    new Subject('J\'ai un soucis avec cette application'),
-                ]
 
-            ])*/
 
         ;
     }

@@ -1,0 +1,27 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier la suite{% endblock %}
+
+{% block body %}
+    <h1>Modifier la suite</h1>
+
+    <div>
+        {{ include('admin/suites/_form.html.twig') }}
+    </div>
+    <div class="btn-group">
+
+
+        <div>
+            {{ include('admin/suites/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <div>
+        <a href="{{ path('admin_suites_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+{% endblock %}

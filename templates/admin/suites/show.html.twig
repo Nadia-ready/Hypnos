@@ -1,0 +1,71 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Suites{% endblock %}
+
+{% block body %}
+    <h1>Suites</h1>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Détails de la suite
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ suite.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ suite.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cover</th>
+                        <td>{{ suite.cover }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ suite.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ suite.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Image Principal</th>
+                        <td>
+                            <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Galerie d'images</th>
+                        <td>
+                            {% for image in images %}
+                                <img src={{ asset(image) }} alt="Image">
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <div>
+            <a href="{{ path('admin_suites_list') }}" class="btn btn-outline-info">Retour à la liste</a>
+        </div>
+
+        <div>
+            <a href="{{ path('admin_suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+        </div>
+
+        {{ include('admin/suites/_delete_form.html.twig') }}
+    </div>
+
+
+
+
+{% endblock %}

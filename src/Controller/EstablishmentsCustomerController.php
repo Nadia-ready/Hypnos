@@ -19,6 +19,7 @@ class EstablishmentsCustomerController extends AbstractController
     {
         return $this->render('establishments.html.twig', [
             'establishments' => $establishmentsRepository->findAll(),
+
         ]);
     }
 
@@ -27,6 +28,8 @@ class EstablishmentsCustomerController extends AbstractController
     {
         return $this->render('establishmentsShow.html.twig', [
             'establishment' => $establishment,
+            'mainImage' => $establishment->getMainImage(),
+            'images' => $establishment->getImages(),
             'suite' => $suites,
         ]);
     }

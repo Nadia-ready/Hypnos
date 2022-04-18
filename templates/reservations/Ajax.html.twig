@@ -1,0 +1,165 @@
+
+
+
+{% block body %}
+
+
+
+    <!-- Booking Start -->
+
+    <div class="container-fluid booking pb-5">
+        <div class="container">
+            <div class="bg-white shadow" style="padding: 35px;">
+                <h2 class="text-center">Verifiez les disponibilités de nos suites</h2>
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <div class="date" id="date1" data-target-input="nearest">
+                                    <input id="arrival_date"
+                                           type="date" class="form-control datetimepicker-input"
+                                           placeholder="Date d'arrivée" data-target="#date1"
+                                           data-toggle="datetimepicker"
+                                           name="arrival_date"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="date" id="date2" data-target-input="nearest">
+                                    <input
+                                            id="departure_date"
+                                            type="date" class="form-control datetimepicker-input"
+                                            placeholder="Date de départ" data-target="#date2"
+                                            data-toggle="datetimepicker"
+                                            name="departure_date"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-select" name="establishment" id="establishment">
+                                    <option selected disabled>Etablissement</option>
+                                    {% for establishment in establishments %}
+                                        <option value="{{ establishment.id }}" {{ loop.first ? 'selected' : '' }}>
+                                            {{ establishment.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div id="loader" class="spinner-border text-dark" role="status" style="display: none;">
+                            <span class="visually-hidden">Chargement en cours...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking End -->
+    <div id="thubmnails"></div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        let arrivalDateValue = null;
+        let departureDateValue = null;
+        let establishmentValue = null;
+
+        $(document).ready(() => {
+            onArrivalDateChange();
+            onDepartureDateChange();
+            onEstablishmentChange();
+        })
+
+        $("#arrival_date").change(onArrivalDateChange);
+        $("#departure_date").change(onDepartureDateChange);
+        $("#establishment").change(onEstablishmentChange);
+
+        function onArrivalDateChange() {
+            arrivalDateValue = $("#arrival_date").val();
+            fetchSuites();
+        }
+
+        function onDepartureDateChange() {
+            departureDateValue = $("#departure_date").val();
+            fetchSuites();
+        }
+
+        function onEstablishmentChange() {
+            establishmentValue = $("#establishment").val();
+            fetchSuites();
+        }
+
+        function filterSuites(suites = []) {
+            return suites.filter(({reservations = []}) => {
+                if (reservations.length === 0) return true;
+                let valid = true;
+                reservations.forEach(({arrival_date, departure_date}) => {
+                    console.log({arrival_date, departure_date, departureDateValue, arrivalDateValue});
+
+                    // Si la date de debut de resa est dans l'interval
+                    if (arrival_date >= arrivalDateValue && arrival_date <= departureDateValue) {
+                        valid = false;
+                    }
+
+                    // si la date de fin de resa est dans l'interval
+                    if (departure_date >= arrivalDateValue && departure_date <= departureDateValue) {
+                        valid = false;
+                    }
+
+                    // si les dates de la resa englobe l'interval
+                    if (arrival_date <= arrivalDateValue && departure_date >= departureDateValue) {
+                        valid = false;
+                    }
+                });
+
+                return valid;
+            })
+        }
+
+        function fetchSuites() {
+            if (arrivalDateValue && departureDateValue && establishmentValue) {
+                // do ajax call
+                $("#loader").show();
+                $.get("/api/suites", {'establishment.id': establishmentValue})
+                    .done((data) => {
+                        const suites = data['hydra:member'];
+                        const reservableSuites = filterSuites(suites);
+
+                        $("#thubmnails").html('');
+                        $("#loader").hide();
+
+                        reservableSuites.forEach((suite) => {
+                            generateThumbnailHTML(suite);
+                        });
+                    })
+                    .fail((err) => {
+                        alert(err);
+                        $("#loader").hide();
+                    });
+            }
+        }
+
+
+        function generateThumbnailHTML(suite) {
+            $("#loader").show();
+            const uri = "{{ absolute_url(path('thumbnail', {'id': '_id_'})) }}".replace('_id_', suite.id);
+
+            const url = new URL(uri);
+            url.searchParams.append('arrival_date', arrivalDateValue);
+            url.searchParams.append('departure_date', departureDateValue);
+
+            $.get(url).done((html) => {
+                $("#thubmnails").append(html);
+                $("#loader").hide();
+            }).fail((err) => {
+                alert(err);
+                $("#loader").hide();
+            });
+        }
+
+
+    </script>
+{% endblock %}

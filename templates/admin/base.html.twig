@@ -29,11 +29,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#" >Accueil</a>
-                <a class="nav-link" href="#">L'expérience Hypnos</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('Home') }}" >Accueil</a>
                 <a class="nav-link" href="{{ path('customer_establishments_list') }}">Nos établissements</a>
                 <a class="nav-link" href="{{ path('reservationsSuites') }}">Réserver</a>
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href={{ path('contact') }}>Contact</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
                 {% endif %}
@@ -82,19 +81,21 @@
 
                             </nav>
                         </div>
-                    </div>
-                    <a class="nav-link collapsed" href={{ path('manager_suites_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Suites
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href={{ path('manager_suites_list_new') }}>Créer une nouvelle suite</a>
+                        <a class="nav-link collapsed" href={{ path('admin_suites_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Suites
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href={{ path('admin_suites_list_new') }}>Créer une suite</a>
+                                <a class="nav-link" href={{ path('admin_suites_list') }}>Liste des suites</a>
 
+                            </nav>
+                        </div>
 
-                        </nav>
                     </div>
+
 
                 </div>
                 <div class="sb-sidenav-footer">

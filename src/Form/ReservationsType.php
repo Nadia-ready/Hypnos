@@ -21,11 +21,7 @@ class ReservationsType extends AbstractType
                 'required' => true])
             ->add('departure_date', DateType::class, [
                 'required' => true])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'lastname',
-                'required' => true,
-            ])
+
             ->add('establishment', EntityType::class, [
                 'class' => Establishments::class,
                 'choice_label' => function (Establishments $establishments) {

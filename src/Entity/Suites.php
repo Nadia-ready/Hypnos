@@ -44,8 +44,8 @@ class Suites
     private $establishment;
 
 
-    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: ImagesSuites::class)]
-    private $image;
+    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: ImagesSuites::class, cascade: ['persist'])]
+    private $images;
 
     #[ORM\OneToMany(mappedBy: 'suite', targetEntity: Reservations::class)]
     private $reservations;
@@ -54,7 +54,7 @@ class Suites
     public function __construct()
     {
 
-        $this->image = new ArrayCollection();
+        $this->images = new ArrayCollection();
         $this->reservations = new ArrayCollection();
     }
 
@@ -152,15 +152,19 @@ class Suites
     /**
      * @return Collection<int, ImagesSuites>
      */
-    public function getImage(): Collection
+    public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
+    }
+
+    public function getMainImage() {
+        return $this->images->get(array_rand($this->images->toArray()));
     }
 
     public function addImage(ImagesSuites $image): self
     {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
             $image->setSuite($this);
         }
 
