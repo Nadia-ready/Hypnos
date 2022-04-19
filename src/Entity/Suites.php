@@ -25,8 +25,6 @@ class Suites
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $cover;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
@@ -37,8 +35,6 @@ class Suites
     #[ORM\Column(type: 'string', length: 255)]
     private $picture;
 
-    #[ORM\Column(type: 'boolean')]
-    private $is_reserved;
 
     #[ORM\ManyToOne(targetEntity: Establishments::class, inversedBy: 'suites')]
     private $establishment;
@@ -75,17 +71,7 @@ class Suites
         return $this;
     }
 
-    public function getCover(): ?string
-    {
-        return $this->cover;
-    }
 
-    public function setCover(string $cover): self
-    {
-        $this->cover = $cover;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -123,17 +109,7 @@ class Suites
         return $this;
     }
 
-    public function getIsReserved(): ?bool
-    {
-        return $this->is_reserved;
-    }
 
-    public function setIsReserved(bool $is_reserved): self
-    {
-        $this->is_reserved = $is_reserved;
-
-        return $this;
-    }
 
     public function getEstablishment(): ?Establishments
     {

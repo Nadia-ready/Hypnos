@@ -3,7 +3,7 @@
 {% block title %} Mes réservations {% endblock %}
 
 {% block body %}
-
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <h1>Mes réservations</h1>
 
           <table class="table">
@@ -33,5 +33,8 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>
+    {% endif %}
 
 {% endblock %}

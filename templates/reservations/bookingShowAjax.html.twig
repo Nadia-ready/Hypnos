@@ -22,7 +22,7 @@
 
 
     <!-- Booking Start -->
-
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <div class="container-fluid booking pb-5">
         <div class="container">
             <div class="bg-white shadow" style="padding: 35px;">
@@ -72,6 +72,9 @@
     </div>
 
     <!-- Booking End -->
+    {% else %}
+        <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>
+    {% endif %}
     <div id="thubmnails"></div>
 
 

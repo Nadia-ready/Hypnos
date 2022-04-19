@@ -18,11 +18,7 @@ use Symfony\Component\Security\Core\Security;
 
 class BookingController extends AbstractController
 {
-    protected User $user;
-    public function __construct(Security $security)
-    {
-        $this->user = $security->getUser();
-    }
+
 
     #[Route('/reservationsSuites', name: 'reservationsSuites', methods: ['GET', 'POST'])]
     public function reservationsSuites(ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository): Response
@@ -85,7 +81,7 @@ class BookingController extends AbstractController
     public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository): Response
     {
         return $this->render('reservations/bookingShowCustomer.html.twig', [
-            'reservations' => $this->user->getReservations(),
+            'reservations' => $this->getReservations(),
         ]);
 
     }
