@@ -81,7 +81,7 @@ class BookingController extends AbstractController
     public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository): Response
     {
         return $this->render('reservations/bookingShowCustomer.html.twig', [
-            'reservations' => $this->getReservations(),
+            'reservations' => $reservationsRepository->findAll(),
         ]);
 
     }
