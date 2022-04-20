@@ -74,5 +74,8 @@ Pour déployer le projet, j'ai utilisé Heroku et l'add-ons 'JawsDb'.
 
 https://hotelhypnos-app.herokuapp.com
 
+## Création administrateur
+Un administrateur est déjà enregistré dans le fichier bachup.sql.
+Pour en ajouter un, vous devez vous connecter au tableau de bord en tant qu'administrateur et créer un nouvel utilisateur.
 
 
