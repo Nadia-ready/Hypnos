@@ -82,10 +82,17 @@ class BookingController extends AbstractController
     }
 
     #[Route('/bookingShowCustomer', name: 'bookingShowCustomer', methods: ['GET', 'POST'])]
-    public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository): Response
+    public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository, Security $security): Response
     {
+
+        $authUser = $security->getUser();
+
+        if(empty($authUser)) {
+            return $this->redirectToRoute('Login');
+        }
+
         return $this->render('reservations/bookingShowCustomer.html.twig', [
-            'reservations' => $this->user->getReservations(),
+            'reservations' => $authUser->getReservations(),
         ]);
 
     }
