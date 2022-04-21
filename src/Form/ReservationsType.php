@@ -6,22 +6,34 @@ use App\Entity\Establishments;
 use App\Entity\Reservations;
 use App\Entity\Suites;
 use App\Entity\User;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class ReservationsType extends AbstractType
 {
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
         $builder
             ->add('arrival_date', DateType::class, [
                 'required' => true])
             ->add('departure_date', DateType::class, [
                 'required' => true])
-
+            ->add('user',EntityType::class, [
+                    'class' => User::class,
+                    'choice_label' => function (User $user) {
+                        return $user->getLastname();
+                    },
+                    'required' => true
+            ])
             ->add('establishment', EntityType::class, [
                 'class' => Establishments::class,
                 'choice_label' => function (Establishments $establishments) {

@@ -45,12 +45,19 @@ class BookingController extends AbstractController
         ]);
     }
 
+    protected User $user;
+    public function __construct(Security $security) {
+        $this->user = $security->getUser();
+    }
+
     #[Route('/booking/{id}', name: 'booking', methods: ['GET', 'POST'])]
-    public function booking(Request $request, Suites $suite, ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository, SuitesRepository $suitesRepository, UserRepository $userRepository): Response
+    public function booking(Request $request,User $user, Suites $suite, ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository, SuitesRepository $suitesRepository, UserRepository $userRepository): Response
     {
+
         $reservation = new Reservations();
         $reservation->setSuite($suite);
         $reservation->setEstablishment($suite->getEstablishment());
+
 
         if ($arrival_date = $request->get('arrival_date')) {
             $reservation->setArrivalDate(new \DateTime($arrival_date));
@@ -72,8 +79,8 @@ class BookingController extends AbstractController
             'establishments' => $establishmentsRepository->findAll(),
             'reservation' => $reservation,
             'form' => $form,
+            'user' => $user,
 
-            'user' => $userRepository->findAll(),
         ]);
     }
 
@@ -81,7 +88,7 @@ class BookingController extends AbstractController
     public function bookingShowCustomer(ReservationsRepository $reservationsRepository, UserRepository $userRepository): Response
     {
         return $this->render('reservations/bookingShowCustomer.html.twig', [
-            'reservations' => $reservationsRepository->findAll(),
+            'reservations' => $this->user->getReservations(),
         ]);
 
     }

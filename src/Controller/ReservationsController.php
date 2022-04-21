@@ -81,7 +81,7 @@ class ReservationsController extends AbstractController
             $reservationsRepository->remove($reservation);
         }
 
-        return $this->redirectToRoute('reservations_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('Home', [], Response::HTTP_SEE_OTHER);
     }
 
 

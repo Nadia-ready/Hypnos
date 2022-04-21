@@ -10,6 +10,7 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>Etablissement</th>
             <th>Arrival_date</th>
             <th>Departure_date</th>
             <th>Annuler</th>
@@ -18,7 +19,12 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.id }}</td>
+                <td> {{ reservation.id }}</td>
+                <td>
+                    {% for establishment in reservation.establishment %}
+                        {{ establishment.name }}
+                    {% endfor %}
+                </td>
                 <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
                 <td>
