@@ -45,10 +45,7 @@ class BookingController extends AbstractController
         ]);
     }
 
-    protected User $user;
-    public function __construct(Security $security) {
-        $this->user = $security->getUser();
-    }
+
 
     #[Route('/booking/{id}', name: 'booking', methods: ['GET', 'POST'])]
     public function booking(Request $request,User $user, Suites $suite, ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository, SuitesRepository $suitesRepository, UserRepository $userRepository): Response
