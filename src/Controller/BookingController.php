@@ -48,12 +48,18 @@ class BookingController extends AbstractController
 
 
     #[Route('/booking/{id}', name: 'booking', methods: ['GET', 'POST'])]
-    public function booking(Request $request,User $user, Suites $suite, ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository, SuitesRepository $suitesRepository, UserRepository $userRepository): Response
+    public function booking(Request $request,Security $security, Suites $suite, ReservationsRepository $reservationsRepository, EstablishmentsRepository $establishmentsRepository, SuitesRepository $suitesRepository, UserRepository $userRepository): Response
     {
+        $authUser = $security->getUser();
+
+        if(empty($authUser)) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $reservation = new Reservations();
         $reservation->setSuite($suite);
         $reservation->setEstablishment($suite->getEstablishment());
+        $reservation->setUser($authUser);
 
 
         if ($arrival_date = $request->get('arrival_date')) {
@@ -72,11 +78,11 @@ class BookingController extends AbstractController
             return $this->redirectToRoute('bookingShowCustomer', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->renderForm('reservations/booking.html.twig', [
             'establishments' => $establishmentsRepository->findAll(),
             'reservation' => $reservation,
             'form' => $form,
-            'user' => $user,
 
         ]);
     }
