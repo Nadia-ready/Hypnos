@@ -88,7 +88,7 @@ class BookingController extends AbstractController
         $authUser = $security->getUser();
 
         if(empty($authUser)) {
-            return $this->redirectToRoute('Login');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('reservations/bookingShowCustomer.html.twig', [
