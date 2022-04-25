@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 19 avr. 2022 à 16:35
+-- Généré le : lun. 25 avr. 2022 à 10:52
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.0.11
 
@@ -380,21 +380,17 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `arrival_date`, `departure_date`, `user_id`, `establishment_id`, `suite_id`) VALUES
-(1, '2021-04-06', '2021-07-07', 13, NULL, NULL),
-(2, '2021-03-20', '2022-02-17', 13, NULL, NULL),
-(3, '2021-04-09', '2022-03-15', 13, NULL, NULL),
-(4, '2021-05-08', '2022-02-16', 14, NULL, NULL),
-(5, '2021-05-12', '2021-12-23', 17, NULL, NULL),
-(6, '2021-05-05', '2021-08-29', 12, NULL, NULL),
-(7, '2021-04-05', '2021-07-09', 15, NULL, NULL),
-(8, '2021-05-08', '2022-02-16', 15, NULL, NULL),
-(9, '2021-05-08', '2021-09-26', 16, NULL, NULL),
-(10, '2021-04-26', '2021-06-07', 20, NULL, NULL),
-(12, '2022-01-01', '2022-01-02', 10, NULL, NULL),
-(13, '2023-01-01', '2023-01-03', 1, NULL, NULL),
 (14, '2022-04-07', '2022-04-08', 1, 1, 14),
-(15, '2022-04-14', '2022-04-22', 1, 1, 12),
-(16, '2022-04-13', '2022-04-16', 1, 2, 9);
+(16, '2022-04-13', '2022-04-16', 1, 2, 9),
+(18, '2022-04-05', '2022-04-07', NULL, 1, 12),
+(19, '2022-04-22', '2022-04-24', NULL, 1, 15),
+(20, '2022-04-26', '2022-04-30', 1, 1, 12),
+(21, '2022-04-05', '2022-04-06', 28, 1, 15),
+(23, '2022-04-23', '2022-04-27', 28, 1, 12),
+(24, '2022-04-23', '2022-04-27', 28, 1, 12),
+(25, '2022-04-12', '2022-04-08', 24, 1, 14),
+(26, '2022-04-12', '2022-04-29', 24, 1, 15),
+(27, '2022-05-24', '2022-05-25', 28, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -462,7 +458,6 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `lastname`, `firstname`)
 (10, 'pbuxy9@latimes.com', '', '$2y$10$I9Z/crf.nt4dTcgohkciOO0DucKGOIq0LkppO23DLiBnzIiN4/S8K', 'Buxy', 'Pavel'),
 (11, 'kseamonsa@tinyurl.com', '', '$2y$10$dv.H2lLco1NdZX33yc/V2eLpFEEjXwp0xmQ5xRp72o3l7kH6hxdgu', 'Seamons', 'Kyle'),
 (12, 'dtyresb@studiopress.com', '', '$2y$10$yeKtK6vlaPNtTH/LAT0V3ukmkKgeCdOz06PIrTRYpWSvqWpkSMoEe', 'Tyres', 'Dedra'),
-(13, 'bwaddingtonc@g.co', '', 'iK8qHhiiCs', '$2y$10$yjLV3vJjQ1A/ILY4xwKV/uKoBqYeIOJSRVbk5olg9CPe0AvV9omAO', 'Binni'),
 (14, 'bmcreedyd@pagesperso-orange.fr', '', '$2y$10$Ex.DY6oejOcNzSt64wsHQeCNeaFOKm13x8o.kleSmkbyNqhTraHum', 'McReedy', 'Budd'),
 (15, 'ygreenlesse@technorati.com', '', '$2y$10$Ex.DY6oejOcNzSt64wsHQeCNeaFOKm13x8o.kleSmkbyNqhTraHum', 'Greenless', 'Yorke'),
 (16, 'wbountifff@myspace.com', '', '$2y$10$Ex.DY6oejOcNzSt64wsHQeCNeaFOKm13x8o.kleSmkbyNqhTraHum', 'Bountiff', 'Winifield'),
@@ -472,7 +467,8 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `lastname`, `firstname`)
 (20, 'sraikesj@amazon.de', '', '$2y$10$Ex.DY6oejOcNzSt64wsHQeCNeaFOKm13x8o.kleSmkbyNqhTraHum', 'Raikes', 'Sunny'),
 (23, 'test2@test2.com', '[\"ROLE_USER\"]', '$2y$13$P5HPU2yLkgYVIyeO.dvd5.qtrG4idslmF4qZpv1bByMv7Jh55USk6', 'TEST2', 'TEST2'),
 (24, 'nadia.epivent@test.fr', '[\"ROLE_USER\"]', '$2y$13$MbG5gJyLe2M4AlebKNKze.TcMrlOP57TCdb6Ii1IR3Agf12/h9OZK', 'EPIVENT', 'nadia'),
-(26, 'test@test.com', '[]', '$2y$13$o49MlzLuDNvUIFOf3slFhOAzcU3TmWINsDoKxId9i29OXbaeg9VIC', 'testhash', 'testhash');
+(27, 'nadia.epivent@user.com', '[\"ROLE_USER\"]', '$2y$13$xCGq36DX9J0Sonsyq9JbZuwogrMUDF7xnyDIvKgPQSXpiiycW2ZjS', 'User', 'nadia'),
+(28, 'user@user.com', '[\"ROLE_USER\"]', '$2y$13$riv/gERnsnyXh3Jy7Y7w0eA05SINZ4CEVPU8uKXqfFS3fxjCemdfK', 'usertest', 'usertest');
 
 --
 -- Index pour les tables déchargées
@@ -554,7 +550,7 @@ ALTER TABLE `images_suites`
 -- AUTO_INCREMENT pour la table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `suites`
@@ -566,7 +562,7 @@ ALTER TABLE `suites`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Contraintes pour les tables déchargées
