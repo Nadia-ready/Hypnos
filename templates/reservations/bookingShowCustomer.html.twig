@@ -11,8 +11,9 @@
             <tr>
                 <th>Id</th>
                 <th>Etablissement</th>
-                <th>Arrival_date</th>
-                <th>Departure_date</th>
+                <th>Suite</th>
+                <th>Date d'arrivée</th>
+                <th>Date de départ</th>
                 <th>Annuler</th>
             </tr>
             </thead>
@@ -21,9 +22,10 @@
                 <tr>
                     <td> {{ reservation.id }}</td>
                     <td>
-                        {% for establishment in reservation.establishment %}
-                            {{ establishment.name }}
-                        {% endfor %}
+                         {{ reservation.establishment.name }}
+                    </td>
+                    <td>
+                        {{ reservation.suite.title }}
                     </td>
                     <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
                     <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
@@ -40,7 +42,8 @@
             </tbody>
         </table>
     {% else %}
-        <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>
+        <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de
+                compte? Incrivez-vous</a></div>
     {% endif %}
 
 {% endblock %}

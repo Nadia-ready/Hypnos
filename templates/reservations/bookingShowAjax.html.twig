@@ -88,27 +88,31 @@
         let departureDateValue = null;
         let establishmentValue = null;
 
-
         $(document).ready(() => {
             onArrivalDateChange();
             onDepartureDateChange();
             onEstablishmentChange();
-        })
+        });
+
         $("#arrival_date").change(onArrivalDateChange);
         $("#departure_date").change(onDepartureDateChange);
         $("#establishment").change(onEstablishmentChange);
+
         function onArrivalDateChange() {
             arrivalDateValue = $("#arrival_date").val();
             fetchSuites();
         }
+
         function onDepartureDateChange() {
             departureDateValue = $("#departure_date").val();
             fetchSuites();
         }
+
         function onEstablishmentChange() {
             establishmentValue = $("#establishment").val();
             fetchSuites();
         }
+
         function filterSuites(suites = []) {
             return suites.filter(({reservations = []}) => {
                 if (reservations.length === 0) return true;
@@ -127,15 +131,8 @@
                     if (arrival_date <= arrivalDateValue && departure_date >= departureDateValue) {
                         valid = false;
                     }
-
-                    // si la date de début est avant la date du jour
-                    if(arrival_date <= date) {
-                        valid = false;
-                    }
                 });
                 return valid;
-
-
             })
         }
         function fetchSuites() {
@@ -158,6 +155,7 @@
                     });
             }
         }
+
         function generateThumbnailHTML(suite) {
             $("#loader").show();
             const uri = "{{ absolute_url(path('thumbnail', {'id': '_id_'})) }}".replace('_id_', suite.id);
