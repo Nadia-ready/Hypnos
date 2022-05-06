@@ -7,18 +7,18 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reservation.id }}</td>
-            </tr>
-            <tr>
-                <th>Arrival_date</th>
-                <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Departure_date</th>
-                <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ reservation.id }}</td>
+        </tr>
+        <tr>
+            <th>Arrival_date</th>
+            <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Departure_date</th>
+            <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
+        </tr>
         </tbody>
     </table>
 

@@ -13,40 +13,40 @@
         <div class="card-body">
             <table id="datatablesSimple">
                 <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ suite.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Title</th>
-                        <td>{{ suite.title }}</td>
-                    </tr>
-                    <tr>
-                        <th>Cover</th>
-                        <td>{{ suite.cover }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ suite.description }}</td>
-                    </tr>
-                    <tr>
-                        <th>Price</th>
-                        <td>{{ suite.price }}</td>
-                    </tr>
-                    <tr>
-                        <th>Image Principal</th>
-                        <td>
-                            <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Galerie d'images</th>
-                        <td>
-                            {% for image in images %}
-                                <img src={{ asset(image) }} alt="Image">
-                            {% endfor %}
-                        </td>
-                    </tr>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ suite.id }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ suite.title }}</td>
+                </tr>
+                <tr>
+                    <th>Cover</th>
+                    <td>{{ suite.cover }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ suite.description }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ suite.price }}</td>
+                </tr>
+                <tr>
+                    <th>Image Principal</th>
+                    <td>
+                        <img src={{ asset(mainImage) }} alt="{{ mainImage.name }}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Galerie d'images</th>
+                    <td>
+                        {% for image in images %}
+                            <img src={{ asset(image) }} alt="Image">
+                        {% endfor %}
+                    </td>
+                </tr>
 
                 </tbody>
             </table>

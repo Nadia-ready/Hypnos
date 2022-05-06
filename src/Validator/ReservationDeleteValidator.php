@@ -27,6 +27,7 @@ class ReservationDeleteValidator extends ConstraintValidator
         $interval = $reservation->getArrivalDate()->diff($now);
         $isValid = $interval->days > 3;
 
+
         if(!$isValid) {
             $this->session->getFlashBag()->add('errors', $constraint->message);
         }

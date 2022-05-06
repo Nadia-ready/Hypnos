@@ -51,73 +51,73 @@
 
 </nav>
 
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
 
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href={{ path('establishments_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Etablissements
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href={{ path('establishments_list_new') }}>Créer un établissement</a>
-                                <a class="nav-link" href={{ path('establishments_list') }}>Liste des établissement</a>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href={{ path('establishments_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Etablissements
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href={{ path('establishments_list_new') }}>Créer un établissement</a>
+                            <a class="nav-link" href={{ path('establishments_list') }}>Liste des établissement</a>
 
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href={{ path('admin_user_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Utilisateurs
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href={{ path('admin_user_new') }}>Créer un nouvel utilisateur</a>
-                                <a class="nav-link" href={{ path('admin_user_list') }}>Liste des utilisateurs</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href={{ path('admin_user_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Utilisateurs
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href={{ path('admin_user_new') }}>Créer un nouvel utilisateur</a>
+                            <a class="nav-link" href={{ path('admin_user_list') }}>Liste des utilisateurs</a>
 
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href={{ path('admin_suites_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Suites
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href={{ path('admin_suites_list_new') }}>Créer une suite</a>
-                                <a class="nav-link" href={{ path('admin_suites_list') }}>Liste des suites</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href={{ path('admin_suites_list') }} data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Suites
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href={{ path('admin_suites_list_new') }}>Créer une suite</a>
+                            <a class="nav-link" href={{ path('admin_suites_list') }}>Liste des suites</a>
 
-                            </nav>
-                        </div>
-
+                        </nav>
                     </div>
 
-
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Vous êtes connecté:</div>
-
-                </div>
-                <div class="sb-sidenav-footer">
-                     <a class="nav-link" href={{ path('app_logout') }}>Se déconnecter</a>
-                </div>
-            </nav>
-        </div>
 
 
-<main class="row align-items-center py-3 py-md-0">
-    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 80px;padding-bottom: 40px" >
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Vous êtes connecté:</div>
 
-        {% block body %}
-
-        {% endblock %}
+            </div>
+            <div class="sb-sidenav-footer">
+                <a class="nav-link" href={{ path('app_logout') }}>Se déconnecter</a>
+            </div>
+        </nav>
     </div>
-</main>
+
+
+    <main class="row align-items-center py-3 py-md-0">
+        <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 80px;padding-bottom: 40px" >
+
+            {% block body %}
+
+            {% endblock %}
+        </div>
+    </main>
 
 </body>
 <script src="{{ asset('JS/index.js') }}"></script>

@@ -67,24 +67,24 @@
                 </thead>
 
                 <tbody>
-                    {% for suite in establishment.suites %}
-                        <tr>
-                            <td>{{ suite.title }} </td>
-                            <td>{{ suite.description }} </td>
-                            <td>{{ suite.price }} </td>
+                {% for suite in establishment.suites %}
+                <tr>
+                    <td>{{ suite.title }} </td>
+                    <td>{{ suite.description }} </td>
+                    <td>{{ suite.price }} </td>
 
 
 
-                            <td>
-                                <a href="{{ path('suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
-                            </td>
-                            <td>
+                    <td>
+                        <a href="{{ path('suites_list_edit', {'id': suite.id}) }}" class="btn btn-outline-info">Modifier</a>
+                    </td>
+                    <td>
 
-                                <a href="{{ path('suites_list_delete', {'id': suite.id}) }}" class="btn btn-outline-info">Supprimer</a>
-                            </td>
+                        <a href="{{ path('suites_list_delete', {'id': suite.id}) }}" class="btn btn-outline-info">Supprimer</a>
+                    </td>
 
-                            {% endfor %}
-                        </tr>
+                    {% endfor %}
+                </tr>
                 </tbody>
 
             </table>

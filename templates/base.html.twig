@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Hypnos Groupe hotellier</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {%  block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-        <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }} >
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
 
     {% endblock stylesheets %}
@@ -35,14 +32,16 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-            <img class="header-top-image" src="{{ asset('asset/image/logo.png') }}" alt="logo" width="50" height="50" class="d-inline-block align-text-top">
+                <img class="header-top-image" src="{{ asset('asset/image/logo.png') }}" alt="logo" width="50"
+                     height="50" class="d-inline-block align-text-top">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="{{ path('Home') }}" >Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('Home') }}">Accueil</a>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a class="nav-link" href="{{ path('bookingShowCustomer') }}">Mes réservations</a>
                     {% endif %}
@@ -50,10 +49,11 @@
                     <a class="nav-link" href="{{ path('reservationsSuites') }}">Réserver</a>
                     <a class="nav-link" href={{ path('contact') }}>Contact</a>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a class="nav-link" href="{{path('establishments_list') }}">Tableau de bord</a>
+                        <a class="nav-link" href="{{ path('establishments_list') }}">Tableau de bord</a>
                     {% endif %}
                     {% if is_granted('ROLE_MANAGER') %}
-                        <a class="nav-link" href="{{path('manager_establishments_list') }}">Gérer votre établissement</a>
+                        <a class="nav-link" href="{{ path('manager_establishments_list') }}">Gérer votre
+                            établissement</a>
                     {% endif %}
                     {% if app.user %}
                         <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
@@ -67,10 +67,10 @@
     </nav>
 </header>
 <main class="row align-items-center py-3 py-md-0">
-    <div class="col w-auto vh-100 d-flex flex-column"  style="padding-top: 0px;padding-bottom: 40px" >
+    <div class="col w-auto vh-100 d-flex flex-column" style="padding-top: 0px;padding-bottom: 40px">
 
         {% set errors = app.session.flashbag.get('errors', []) %}
-        {% if errors is not empty  %}
+        {% if errors is not empty %}
             <div class="alert alert-danger" role="alert">
                 {% for error in errors %}
                     <p class="mb-0">{{ error }}</p>
@@ -89,7 +89,7 @@
 </body>
 
 
-{%  block script %}
+{% block script %}
 {% endblock %}
 
 

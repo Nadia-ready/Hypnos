@@ -4,41 +4,41 @@
 
 {% block body %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    <h1>Mes réservations</h1>
+        <h1>Mes réservations</h1>
 
-          <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Etablissement</th>
-            <th>Arrival_date</th>
-            <th>Departure_date</th>
-            <th>Annuler</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
+        <table class="table">
+            <thead>
             <tr>
-                <td> {{ reservation.id }}</td>
-                <td>
-                    {% for establishment in reservation.establishment %}
-                        {{ establishment.name }}
-                    {% endfor %}
-                </td>
-                <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
-                <td>
-                    {{ include('reservations/_delete_form.html.twig') }}
+                <th>Id</th>
+                <th>Etablissement</th>
+                <th>Arrival_date</th>
+                <th>Departure_date</th>
+                <th>Annuler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td> {{ reservation.id }}</td>
+                    <td>
+                        {% for establishment in reservation.establishment %}
+                            {{ establishment.name }}
+                        {% endfor %}
+                    </td>
+                    <td>{{ reservation.arrivalDate ? reservation.arrivalDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ reservation.departureDate ? reservation.departureDate|date('Y-m-d') : '' }}</td>
+                    <td>
+                        {{ include('reservations/_delete_form.html.twig') }}
 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous</a></div>
     {% endif %}

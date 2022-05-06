@@ -7,54 +7,56 @@
 
     <!-- Booking Start -->
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    
-    <div class="container-fluid booking pb-5">
-        <div class="container">
-            <div class="bg-white shadow" style="padding: 35px;">
-                <h2 class="text-center">Verifiez les disponibilités de nos suites</h2>
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <div class="date" id="date1" data-target-input="nearest">
-                                    <input id="arrival_date"
-                                           type="date" class="form-control datetimepicker-input"
-                                           placeholder="Date d'arrivée" data-target="#date1"
-                                           data-toggle="datetimepicker"
-                                           name="arrival_date"/>
+
+        <div class="container-fluid booking pb-5">
+            <div class="container">
+                <div class="bg-white shadow" style="padding: 35px;">
+                    <h2 class="text-center">Verifiez les disponibilités de nos suites</h2>
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <div class="date" id="date1" data-target-input="nearest">
+                                        <input id="arrival_date"
+                                               type="date" class="form-control datetimepicker-input"
+                                               min="{{ "now"|date("Y-m-d") }}"
+                                               placeholder="Date d'arrivée" data-target="#date1"
+                                               data-toggle="datetimepicker"
+                                               name="arrival_date"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="date" id="date2" data-target-input="nearest">
-                                    <input
-                                            id="departure_date"
-                                            type="date" class="form-control datetimepicker-input"
-                                            placeholder="Date de départ" data-target="#date2"
-                                            data-toggle="datetimepicker"
-                                            name="departure_date"/>
+                                <div class="col-md-4">
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <input
+                                                id="departure_date"
+                                                type="date" class="form-control datetimepicker-input"
+                                                min="{{ "now"|date("Y-m-d") }}"
+                                                placeholder="Date de départ" data-target="#date2"
+                                                data-toggle="datetimepicker"
+                                                name="departure_date"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select" name="establishment" id="establishment">
-                                    <option selected disabled>Etablissement</option>
-                                    {% for establishment in establishments %}
-                                        <option value="{{ establishment.id }}" {{ loop.first ? 'selected' : '' }}>
-                                            {{ establishment.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
+                                <div class="col-md-4">
+                                    <select class="form-select" name="establishment" id="establishment">
+                                        <option selected disabled>Etablissement</option>
+                                        {% for establishment in establishments %}
+                                            <option value="{{ establishment.id }}" {{ loop.first ? 'selected' : '' }}>
+                                                {{ establishment.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <div id="loader" class="spinner-border text-dark" role="status" style="display: none;">
-                            <span class="visually-hidden">Chargement en cours...</span>
+                        <div class="col-md-2 text-center">
+                            <div id="loader" class="spinner-border text-dark" role="status" style="display: none;">
+                                <span class="visually-hidden">Chargement en cours...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% else %}
         <div class="section-title text-center text-primary text-uppercase"><a href="{{ path('app_register') }}">Pas de compte? Incrivez-vous pour vérifier la disponibilité de nos suites</a></div>
     {% endif %}
@@ -72,6 +74,7 @@
         let arrivalDateValue = null;
         let departureDateValue = null;
         let establishmentValue = null;
+
 
         $(document).ready(() => {
             onArrivalDateChange();
@@ -119,9 +122,14 @@
                     if (arrival_date <= arrivalDateValue && departure_date >= departureDateValue) {
                         valid = false;
                     }
+
+
+
                 });
 
                 return valid;
+
+
             })
         }
 

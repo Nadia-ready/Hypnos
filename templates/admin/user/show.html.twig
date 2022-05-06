@@ -10,33 +10,33 @@
             <i class="fas fa-table me-1"></i>
             Détails de l'établissements
         </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
+        <div class="card-body">
+            <table id="datatablesSimple">
                 <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ user.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Roles</th>
-                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td>{{ user.password }}</td>
-                    </tr>
-                    <tr>
-                        <th>Lastname</th>
-                        <td>{{ user.lastname }}</td>
-                    </tr>
-                    <tr>
-                        <th>Firstname</th>
-                        <td>{{ user.firstname }}</td>
-                    </tr>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ user.password }}</td>
+                </tr>
+                <tr>
+                    <th>Lastname</th>
+                    <td>{{ user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Firstname</th>
+                    <td>{{ user.firstname }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
